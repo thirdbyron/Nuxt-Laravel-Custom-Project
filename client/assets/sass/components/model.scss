@@ -1,0 +1,25 @@
+.model {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    #dummy {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        &:before {
+            position: absolute;
+            top: 21px;
+            content: "";
+            margin: 0 auto;
+            display: block;
+            left: 0;
+            right: 0;
+            width: 163px;
+            height: 50px;
+            background-image: url('~@/assets/media/img/logo-dummy.png');
+            background-size: contain;
+        }
+    }
+}

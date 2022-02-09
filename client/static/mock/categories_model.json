@@ -1,0 +1,451 @@
+[
+    {
+        "id": 1,
+        "category_name" : "Футболки",
+        "items": [
+            {
+                "id": 1,
+                "short_name": "Черно-белая",
+                "name": "Футболка приталенная",
+                "start_price": "1300",
+                "short_desc": "100% хлопок",
+                "desc": "Футболка из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно. ",
+                "image_url": "assets/media/img/std_tshirt.png",
+                "type": "body",
+                "sizes": [
+                    {
+                        "name": "S"
+                    },
+                    {
+                        "name": "M"
+                    },
+                    {
+                        "name": "L"
+                    },
+                    {
+                        "name": "XL"
+                    }
+                ],
+                "defaults": [
+                    {
+                        "name": "Вырез",
+                        "type": "Вариант 1",
+                        "model_name": "bodyNeck",
+                        "model_type": "neck",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "leftArm",
+                        "model_type": "small",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "rightArm",
+                        "model_type": "small",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Передняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyFront",
+                        "model_type": "standart",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Задняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyBack",
+                        "model_type": "standart",
+                        "color": "#ffffff"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "short_name": "Цветастая",
+                "name": "Футболка приталенная",
+                "start_price": "1700",
+                "short_desc": "100% хлопок",
+                "desc": "Футболка из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно. ",
+                "image_url": "assets/media/img/std_tshirt.png",
+                "type": "body",
+                "sizes": [
+                    {
+                        "name": "S"
+                    },
+                    {
+                        "name": "M"
+                    },
+                    {
+                        "name": "L"
+                    },
+                    {
+                        "name": "XL"
+                    }
+                ],
+                "defaults": [
+                    {
+                        "name": "Вырез",
+                        "type": "Вариант 1",
+                        "model_name": "bodyNeck",
+                        "model_type": "neck",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "leftArm",
+                        "model_type": "medium",
+                        "color": "#ffb833"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "rightArm",
+                        "model_type": "medium",
+                        "color": "#ffb833"
+                    },
+                    {
+                        "name": "Передняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyFront",
+                        "model_type": "circle",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Задняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyBack",
+                        "model_type": "circle",
+                        "color": "#333333"
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "short_name": "Прямая длинная",
+                "name": "Футболка прямая длинная",
+                "start_price": "1400",
+                "short_desc": "100% хлопок",
+                "desc": "Футболка из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно. ",
+                "image_url": "assets/media/img/std_tshirt.png",
+                "type": "body",
+                "sizes": [
+                    {
+                        "name": "S"
+                    },
+                    {
+                        "name": "M"
+                    },
+                    {
+                        "name": "L"
+                    },
+                    {
+                        "name": "XL"
+                    }
+                ],
+                "defaults": [
+                    {
+                        "name": "Вырез",
+                        "type": "Вариант 1",
+                        "model_name": "bodyNeck",
+                        "model_type": "neck",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "leftArm",
+                        "model_type": "medium",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "rightArm",
+                        "model_type": "medium",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Передняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyFront",
+                        "model_type": "long",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Задняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyBack",
+                        "model_type": "long",
+                        "color": "#ffffff"
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "short_name": "Серая",
+                "name": "Футболка приталенная",
+                "start_price": "1300",
+                "short_desc": "100% хлопок",
+                "desc": "Футболка из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно. ",
+                "image_url": "assets/media/img/std_tshirt.png",
+                "type": "body",
+                "sizes": [
+                    {
+                        "name": "S"
+                    },
+                    {
+                        "name": "M"
+                    },
+                    {
+                        "name": "L"
+                    },
+                    {
+                        "name": "XL"
+                    }
+                ],
+                "defaults": [
+                    {
+                        "name": "Вырез",
+                        "type": "Вариант 1",
+                        "model_name": "bodyNeck",
+                        "model_type": "neck",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "leftArm",
+                        "model_type": "straight",
+                        "color": "#bbbbbb"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "rightArm",
+                        "model_type": "straight",
+                        "color": "#bbbbbb"
+                    },
+                    {
+                        "name": "Передняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyFront",
+                        "model_type": "standart",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Задняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyBack",
+                        "model_type": "standart",
+                        "color": "#333333"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "category_name" : "Худи",
+        "items": [
+            {
+                "id": 6,
+                "short_name": "Оранжево-белый",
+                "name": "Оранжевый-белый Худи Оверсайз",
+                "start_price": "1400",
+                "short_desc": "100% хлопок",
+                "desc": "Футболка из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно. ",
+                "image_url": "assets/media/img/std_tshirt.png",
+                "type": "body",
+                "sizes": [
+                    {
+                        "name": "S"
+                    },
+                    {
+                        "name": "M"
+                    },
+                    {
+                        "name": "L"
+                    },
+                    {
+                        "name": "XL"
+                    }
+                ],
+                "defaults": [
+                    {
+                        "name": "Вырез",
+                        "type": "Вариант 1",
+                        "model_name": "bodyNeck",
+                        "model_type": "neck",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "leftArm",
+                        "model_type": "long",
+                        "color": "#ffb833"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "rightArm",
+                        "model_type": "long",
+                        "color": "#ffb833"
+                    },
+                    {
+                        "name": "Передняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyFront",
+                        "model_type": "standart",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Задняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyBack",
+                        "model_type": "standart",
+                        "color": "#ffffff"
+                    }
+                ]
+            },
+            {
+                "id": 7,
+                "short_name": "Серый",
+                "name": "Серый Худи Оверсайз",
+                "start_price": "1400",
+                "short_desc": "100% хлопок",
+                "desc": "Футболка из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно. ",
+                "image_url": "assets/media/img/std_tshirt.png",
+                "type": "body",
+                "sizes": [
+                    {
+                        "name": "S"
+                    },
+                    {
+                        "name": "M"
+                    },
+                    {
+                        "name": "L"
+                    },
+                    {
+                        "name": "XL"
+                    }
+                ],
+                "defaults": [
+                    {
+                        "name": "Вырез",
+                        "type": "Вариант 1",
+                        "model_name": "bodyNeck",
+                        "model_type": "neck",
+                        "color": "#ffb833"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "leftArm",
+                        "model_type": "long",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "rightArm",
+                        "model_type": "long",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Передняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyFront",
+                        "model_type": "long",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Задняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyBack",
+                        "model_type": "long",
+                        "color": "#333333"
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "short_name": "Красивый",
+                "name": "Белый Худи Оверсайз",
+                "start_price": "1400", 
+                "short_desc": "100% хлопок",
+                "desc": "Худи из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно. Худи из 100% хлопка премиум качества. Прямой фасон, не облегает, сидит свободно.",
+                "image_url": "assets/media/img/std_tshirt.png",
+                "type": "body",
+                "sizes": [
+                    {
+                        "name": "S"
+                    },
+                    {
+                        "name": "M"
+                    },
+                    {
+                        "name": "L"
+                    },
+                    {
+                        "name": "XL"
+                    }
+                ],
+                "defaults": [
+                    {
+                        "name": "Вырез",
+                        "type": "Вариант 1",
+                        "model_name": "bodyNeck",
+                        "model_type": "neck",
+                        "color": "#ffb833"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "leftArm",
+                        "model_type": "medium",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Рукава",
+                        "type": "Вариант 1",
+                        "model_name": "rightArm",
+                        "model_type": "medium",
+                        "color": "#333333"
+                    },
+                    {
+                        "name": "Передняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyFront",
+                        "model_type": "circle",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "name": "Задняя часть",
+                        "type": "Вариант 1",
+                        "model_name": "bodyBack",
+                        "model_type": "circle",
+                        "color": "#ffffff"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "category_name" : "Штаны",
+        "items": []
+    },
+    {
+        "id": 4,
+        "category_name" : "Шапки",
+        "items": []
+    }
+]
