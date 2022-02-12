@@ -30,7 +30,7 @@ const mutations = {
 const actions = {
     async getItems({ commit }) {
         const items = await this.$axios.get('http://127.0.0.1:8000/api/categories')
-        console.log(items.data.data);
+        //console.log(items.data.data);
         commit('setCategoriesModel', items.data.data)
         return items.data
     }

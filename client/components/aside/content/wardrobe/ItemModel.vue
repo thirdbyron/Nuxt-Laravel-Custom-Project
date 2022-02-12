@@ -36,33 +36,6 @@ export default {
         lightColor: 0xffffff,
       },
       activeModel: null,
-      activeClothes: {
-        bodyFront: {
-          color: null,
-          active: null,
-          path: "models/man/front",
-        },
-        bodyBack: {
-          color: null,
-          active: null,
-          path: "models/man/back",
-        },
-        bodyNeck: {
-          color: null,
-          active: null,
-          path: "models/man/neck",
-        },
-        leftArm: {
-          color: null,
-          active: null,
-          path: "models/man/sleeves/left",
-        },
-        rightArm: {
-          color: null,
-          active: null,
-          path: "models/man/sleeves/right",
-        },
-      },
     };
   },
 

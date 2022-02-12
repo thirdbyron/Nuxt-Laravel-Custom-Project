@@ -128,6 +128,7 @@ export default {
         toWardrobe: function (item) {
             if(this.$store.getters['wardrobe/wardrobe'].length < 5) {
                 this.$store.dispatch('wardrobe/addProduct', item)
+                
                 this.reloadModel(item.defaults)
                 this.activeItem = null
             } else {
