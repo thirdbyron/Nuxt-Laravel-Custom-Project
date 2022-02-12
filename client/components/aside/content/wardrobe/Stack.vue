@@ -218,82 +218,122 @@ export default {
       });
     },
 
-    initModels: function () {
+    initModels: function ( domElements ) {
       try {
-        const domElements = document.querySelectorAll('.item-image');
+
         domElements.forEach((element) => {
-          this.initModelScene(element);
+          //this.initModelScene(element);
+
+          let global = this.global;
+
+          //set scene
+          const scene = new Scene();
+          scene.background = new Color(0xffffff);
+
+          //set renderer
+          const renderer = new WebGLRenderer({ antialias: true });
+          renderer.setSize(element.offsetWidth, element.offsetHeight);
+
+          //appending in dom
+          element.appendChild(renderer.domElement);
+
+          //set camera
+          const camera = new PerspectiveCamera(
+            60,
+            element.offsetWidth / element.offsetHeight,
+            1,
+            1000
+          );
+          camera.position.set(0, 10, 0);
+
+          //controls
+          const controls = new OrbitControls(camera, renderer.domElement);
+          controls.enableZoom = false;
+          controls.enablePan = false;
+
+          var apiItem = this.wardrobe.filter(function (item) {
+            if (item.id == element.id.replace(/\D/g, "")) {
+              return item;
+            }
+          });
+
+          this.loadModel(apiItem, scene);
+
+          //set light
+          /*const ambient = new AmbientLight(this.colors.lightColor, 1);
+          scene.add(ambient);
+          scene.scale.multiplyScalar(10);*/
+
+          const light = new PointLight(0xc4c4c4, 1);
+          light.position.set(10, 10, 5);
+          scene.add(light);
+
+          const sphereLight = new HemisphereLight(0xffffff, 0x000000, 2);
+          scene.add(sphereLight);
+
+          //camera.position.set(0, 0, perspective);
+          camera.lookAt(new Vector3(0, 0, 0));
+
+          this.animate(controls, renderer, scene, camera);
         });
 
-        this.wardrobe.forEach(( apiElement, index ) => {
-          let domElement = document.querySelector( "#model" + index + ' > canvas' );
-          this.loadModel( domElement, apiElement );
-        });
-      } catch {
-        return;
+        /*this.wardrobe.forEach((apiElement, index) => {
+          let domElement = document.querySelector(
+            "#model" + index + " > canvas"
+          );
+          this.loadModel(domElement, apiElement);
+        });*/
+      } catch (error) {
+        console.log(error);
       }
     },
-    initModelScene: function (element) {
-      let global = this.global;
 
-      
-
-      //set scene
-      global.scene = new Scene();
-      global.scene.background = new Color(0xffffff);
-      
-      
-      //set camera
-      global.camera = new PerspectiveCamera(
-        75,
-        element.offsetWidth / element.offsetHeight,
-        0.1,
-        1000
-      );
-      global.camera.position.set(5, 20, 5);
-      global.camera.lookAt(new Vector3(0, 0, 0));
-
-
-      //set renderer
-      global.renderer = new WebGLRenderer({ antialias: true });
-      global.renderer.setSize(element.offsetWidth, element.offsetHeight);
-      
-      //set light
-      const ambient = new AmbientLight(this.colors.lightColor, 1);
-      global.scene.add(ambient);
-      global.scene.scale.multiplyScalar(10);
-
-      const light = new PointLight(0xc4c4c4, 1);
-      light.position.set(20, 0, 20);
-      global.scene.add(light);
-      
-      //controls
-      global.controls = new OrbitControls(
-        global.camera,
-        global.renderer.domElement
-      );
-      global.controls.enableZoom = false;
-      global.controls.enablePan = false;
-
-      element.appendChild(global.renderer.domElement);
-
-      this.animate();
+    animate: function (controls, renderer, scene, camera) {
+      try{
+        requestAnimationFrame(() => {
+          //console.log(renderer);
+          renderer.render(scene, camera);
+          controls.update();
+          this.animate(controls, renderer, scene, camera);
+        });
+      }
+      catch (error) {
+        console.log(error);
+      }
     },
-    animate: function () {
-      requestAnimationFrame(this.animate);
-      this.global.controls.update();
-      this.global.renderer.render(this.global.scene, this.global.camera);
+    loadModel: function (apiElement, scene) {
+      console.log(apiElement, scene);
+
+      try {
+        const loader = new GLTFLoader();
+
+        apiElement[0].defaults.forEach((item) => {
+          console.log(item);
+          loader.load(
+            "/models/" + item.model_path + "/" + item.model_name + ".glb",
+            function (gltf) {
+              console.log(gltf.scene.children);
+              gltf.scene.children[0].position.set(0, -1.2, 0);
+              gltf.scene.scale.set(10, 10, 10);
+              scene.add(gltf.scene);
+            },
+            undefined,
+            function (error) {
+              console.log(error);
+            }
+          );
+        });
+      } catch (error) {
+        console.log(error);
+      }
     },
-    loadModel: function ( domElement, apiElement ) {
-      
-    }
   },
   mounted() {
     this.$store.commit("wardrobe/stopEditing");
     this.$store.commit("wardrobe/resetGender");
 
     this.$nextTick(() => {
-      this.initModels();
+      this.initModels(document.querySelectorAll(".item-image"));
     });
   },
 };
