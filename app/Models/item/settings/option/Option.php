@@ -9,5 +9,5 @@ class Option extends Model
 {
     use HasFactory;
     
-    protected $fillable = [ 'element_id', 'name', 'image_url', 'model_type', ];
+    protected $fillable = [ 'element_id', 'name', 'image_url', 'model_type', 'model_path' ];
 }

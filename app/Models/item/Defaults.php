@@ -9,5 +9,5 @@ class Defaults extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'item_id', 'name', 'type', 'model_name', 'model_type', 'color', 'model_path' ];
+    protected $fillable = [ 'item_id', 'model_name', 'model_type', 'color', 'model_path', 'name', 'type' ];
 }

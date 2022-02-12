@@ -16,7 +16,7 @@ class CreateOptionsTable extends Migration
         Schema::create('options', function (Blueprint $table) {
             $table->id();
             $table->foreignId('element_id')->constrained()->cascadeOnDelete();
-            $table->string( 'name', 25 );
+            $table->string( 'name', 50 );
             $table->text('image_url');
             $table->string('model_type', 50);
             $table->text('model_path');
