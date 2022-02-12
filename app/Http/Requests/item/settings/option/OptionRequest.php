@@ -27,7 +27,8 @@ class OptionRequest extends FormRequest
             'element_id' => [ 'required', 'integer', ],
             'name' => [ 'required', 'string', 'max:25' ],
             'image_url' => [ 'required', 'string', ],
-            'model_type' => [ 'required', 'string', 'max:25' ],
+            'model_type' => [ 'required', 'string', 'max:50' ],
+            'model_path' => [ 'required', 'string', ],
         ];
     }
 }

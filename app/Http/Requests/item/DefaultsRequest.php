@@ -25,9 +25,12 @@ class DefaultsRequest extends FormRequest
     {
         return [
             'item_id' => [ 'required', 'integer', ],
+            'name' => [ 'required', 'string', 'max:25' ],
+            'type' => [ 'required', 'string', 'max:50' ],
             'model_name' => [ 'required', 'string', 'max:25' ],
-            'model_type' => [ 'required', 'string', 'max:25' ],
+            'model_type' => [ 'required', 'string', 'max:50' ],
             'color' => [ 'required', 'string', 'min:4', 'max:9' ],
+            'model_path' => [ 'required', 'string' ]
         ];
     }
 }

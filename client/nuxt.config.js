@@ -1,65 +1,61 @@
-const imageminMozjpeg = require('imagemin-mozjpeg')
-const ImageminPlugin = require('imagemin-webpack-plugin').default
-const isDev = process.env.NODE_ENV !== 'production'
+const imageminMozjpeg = require("imagemin-mozjpeg");
+const ImageminPlugin = require("imagemin-webpack-plugin").default;
+const isDev = process.env.NODE_ENV !== "production";
 
 module.exports = {
   head: {
     htmlAttrs: {
-      lang: 'ru'
+      lang: "ru"
     },
-    title: 'Nuxt APP',
+    title: "Nuxt APP",
     meta: [
-      { hid: 'description', name: 'description', content: 'Интернет-магазин' }
+      { hid: "description", name: "description", content: "Интернет-магазин" }
     ],
-    link: [
-      { rel: 'shortcut icon', href: 'favicon.ico' }
-    ]
+    link: [{ rel: "shortcut icon", href: "favicon.ico" }]
   },
   rootDir: __dirname,
-  serverMiddleware: [
-  ],
+  serverMiddleware: [],
   router: {
     prefetchLinks: false
   },
-  loading: { color: '#ddd' },
-  css: [
-    './assets/sass/app.scss'
-  ],
-  plugins: [
-    '~plugins/plugin.js',
-    '~plugins/modal.js'
-  ],
+  loading: { color: "#ddd" },
+  css: ["./assets/sass/app.scss"],
+  plugins: ["~plugins/plugin.js", "~plugins/modal.js"],
+  buildModules: ["@nuxtjs/dotenv"],
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    'nuxt-trailingslash-module',
-    'nuxt-webfontloader',
-    'cookie-universal-nuxt',
-    '@nuxtjs/style-resources',
-    ['nuxt-vuex-localstorage', {
-      mode: 'debug',
-      localStorage: ['wardrobe', 'cart']
-    }]
+    "@nuxtjs/axios",
+    "nuxt-trailingslash-module",
+    "nuxt-webfontloader",
+    "cookie-universal-nuxt",
+    "@nuxtjs/style-resources",
+    [
+      "nuxt-vuex-localstorage",
+      {
+        mode: "debug",
+        localStorage: ["wardrobe", "cart"]
+      }
+    ]
   ],
 
   webfontloader: {
     events: false,
     google: {
-      families: ['Open+Sans:400,600:cyrillic&display=swap']
+      families: ["Open+Sans:400,600:cyrillic&display=swap"]
     },
     timeout: 5000
   },
   styleResources: {
     // your settings here
-    scss: ['./assets/sass/variables.scss'], // alternative: scss
+    scss: ["./assets/sass/variables.scss"], // alternative: scss
     less: [],
     stylus: []
   },
   /*
-  ** Axios module configuration
-  */
+   ** Axios module configuration
+   */
   axios: {
-    BaseURL: 'http://enjecy-admin.drevproektstroi.ru/api/'
+    BaseURL: "http://enjecy-admin.drevproektstroi.ru/api/"
   },
   render: {
     // http2: {
@@ -75,17 +71,20 @@ module.exports = {
     }
   },
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     optimizeCss: false,
     filenames: {
-      app: ({ isDev }) => isDev ? '[name].js' : 'js/[contenthash].js',
-      chunk: ({ isDev }) => isDev ? '[name].js' : 'js/[contenthash].js',
-      css: ({ isDev }) => isDev ? '[name].css' : 'css/[contenthash].css',
-      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]',
-      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[contenthash:7].[ext]',
-      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[contenthash:7].[ext]'
+      app: ({ isDev }) => (isDev ? "[name].js" : "js/[contenthash].js"),
+      chunk: ({ isDev }) => (isDev ? "[name].js" : "js/[contenthash].js"),
+      css: ({ isDev }) => (isDev ? "[name].css" : "css/[contenthash].css"),
+      img: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "img/[contenthash:7].[ext]",
+      font: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "fonts/[contenthash:7].[ext]",
+      video: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "videos/[contenthash:7].[ext]"
     },
     ...(!isDev && {
       html: {
@@ -115,57 +114,56 @@ module.exports = {
         ignoreOrder: true
       }
     }),
-    transpile: ['vue-lazy-hydration', 'intersection-observer'],
+    transpile: ["vue-lazy-hydration", "intersection-observer"],
     postcss: {
       plugins: {
         ...(!isDev && {
-          cssnano: {
-          }
+          cssnano: {}
         })
       },
       ...(!isDev && {
         preset: {
-          browsers: 'cover 99.5%',
+          browsers: "cover 99.5%",
           autoprefixer: true
         }
       }),
 
-      order: 'cssnanoLast'
+      order: "cssnanoLast"
     },
-    extend (config, ctx) {
-      const ORIGINAL_TEST = '/\\.(png|jpe?g|gif|svg|webp)$/i'
+    extend(config, ctx) {
+      const ORIGINAL_TEST = "/\\.(png|jpe?g|gif|svg|webp)$/i";
       const imageMinPlugin = new ImageminPlugin({
         pngquant: {
-          quality: '5-30',
+          quality: "5-30",
           speed: 7,
           strip: true
         },
         jpegtran: {
           progressive: true
-
         },
         gifsicle: {
           interlaced: true
         },
-        plugins: [
-        ]
-      })
-      if (!ctx.isDev) config.plugins.push(imageMinPlugin)
+        plugins: []
+      });
+      if (!ctx.isDev) config.plugins.push(imageMinPlugin);
 
       config.module.rules.forEach(rule => {
         if (rule.test.toString() === ORIGINAL_TEST) {
-          rule.test = /\.(png|jpe?g|gif|webp)$/i
+          rule.test = /\.(png|jpe?g|gif|webp)$/i;
           rule.use = [
             {
-              loader: 'url-loader',
+              loader: "url-loader",
               options: {
                 limit: 1000,
-                name: ctx.isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]'
+                name: ctx.isDev
+                  ? "[path][name].[ext]"
+                  : "img/[contenthash:7].[ext]"
               }
             }
-          ]
+          ];
         }
-      })
+      });
     }
   }
-}
+};

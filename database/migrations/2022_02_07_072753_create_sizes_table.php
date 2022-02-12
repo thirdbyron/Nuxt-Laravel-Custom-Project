@@ -16,7 +16,7 @@ class CreateSizesTable extends Migration
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->string('name', 3);
+            $table->string('name');
             $table->timestamps();
         });
     }

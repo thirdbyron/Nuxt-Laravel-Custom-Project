@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOptionsTable extends Migration
+class CreateRelativeModelPathsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('options', function (Blueprint $table) {
+        Schema::create('relative_model_paths', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('element_id')->constrained()->cascadeOnDelete();
-            $table->string( 'name', 25 );
-            $table->text('image_url');
-            $table->string('model_type', 50);
-            $table->text('model_path');
+            $table->string( 'model_category', 25 );
+            $table->text('relative_model_url');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('options');
+        Schema::dropIfExists('relative_model_paths');
     }
 }
