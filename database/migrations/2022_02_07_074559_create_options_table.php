@@ -18,6 +18,7 @@ class CreateOptionsTable extends Migration
             $table->foreignId('element_id')->constrained()->cascadeOnDelete();
             $table->string( 'name', 50 );
             $table->text('image_url');
+            $table->string('model_name', 25);
             $table->string('model_type', 50);
             $table->text('model_path');
             $table->timestamps();

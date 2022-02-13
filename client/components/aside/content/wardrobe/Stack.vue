@@ -70,6 +70,7 @@ import {
   AmbientLight,
   PointLight,
   Vector3,
+  Matrix4,
 } from "three-full";
 
 export default {
@@ -252,6 +253,12 @@ export default {
           const controls = new OrbitControls(camera, renderer.domElement);
           controls.enableZoom = false;
           controls.enablePan = false;
+          controls.enablePan = false;
+          controls.screenSpacePanning = true;
+          controls.enableRotate = true;
+          controls.minPolarAngle = Math.PI / 2.2; //Math.PI/2;
+          controls.maxPolarAngle = Math.PI / 1.8; //Math.PI/2;
+          controls.target.set( 0, 1, 0 );
 
           let inst = this;
           var apiItem = this.wardrobe.filter(function (item) {
@@ -276,8 +283,7 @@ export default {
           const sphereLight = new HemisphereLight(0xffffff, 0x000000, 2);
           scene.add(sphereLight);
 
-          //camera.position.set(0, 0, perspective);
-          camera.lookAt(new Vector3(0, 0, 0));
+          camera.position.set(0, 0, 10);
 
           this.animate(controls, renderer, scene, camera);
         });
@@ -316,8 +322,14 @@ export default {
           loader.load(
             "/models/" + item.model_path + "/" + item.model_name + ".glb",
             function (gltf) {
-              //console.log(gltf.scene.children);
-              gltf.scene.children[0].position.set(0, -1.2, 0);
+              let model = gltf.scene.children[0];
+
+              //model.geometry.computeBoundingSphere();
+              //const modelPosInAir = model.geometry.boundingSphere.center;
+              console.log(model);
+              
+              model.position.set(0, -1.45 * 0.1, 0);
+              //model.rotation.set(90, 0, 0);
               gltf.scene.scale.set(10, 10, 10);
               scene.add(gltf.scene);
             },
@@ -343,14 +355,12 @@ export default {
 
   watch: {
     wardrobe: function (newWardrobe, oldWardrobe) {
-      this.$nextTick(
-        async function () {
-          if (newWardrobe.length < oldWardrobe.length) return;
-          const items = await document.querySelectorAll(".item-image");
-          //console.log({ items, newWardrobe });
-          await this.initModels([items[items.length - 1]]);
-        }
-      );
+      this.$nextTick(async function () {
+        if (newWardrobe.length < oldWardrobe.length) return;
+        const items = await document.querySelectorAll(".item-image");
+        //console.log({ items, newWardrobe });
+        await this.initModels([items[items.length - 1]]);
+      });
     },
   },
 };

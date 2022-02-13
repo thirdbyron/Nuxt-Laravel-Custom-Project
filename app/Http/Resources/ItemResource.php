@@ -30,6 +30,7 @@ class ItemResource extends JsonResource
             'image_url' => $this->image_url,
             'animation_url' => $this->animation_url,
             'type' => $this->type,
+            'model_position' => $this->model_position,
             'sizes' => SizeResource::collection($this->sizes),
             'defaults' => DefaultsResource::collection($this->defaults),
             'settings' => [

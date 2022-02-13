@@ -24,6 +24,7 @@ class CreateItemsTable extends Migration
             $table->text('image_url');
             $table->text('animation_url')->nullable();
             $table->string( 'type', 25 );
+            $table->tinyInteger('model_position');
             $table->timestamps();
         });
     }

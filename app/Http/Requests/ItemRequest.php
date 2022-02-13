@@ -24,15 +24,16 @@ class ItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => [ 'required', 'integer', ],
-            'short_name' => [ 'required', 'string', 'max:25' ],
-            'name' => [ 'required', 'string', 'max:50' ],
-            'start_price' => [ 'required', 'integer' ],
-            'short_desc' => [ 'required', 'string', 'max:100'],
-            'desc' => [ 'required', 'string' ],
-            'image_url' => [ 'required', 'string' ],
-            'animation_url' => [ 'string' ],
-            'type' => [ 'required', 'string', 'max:25' ],
+            'category_id' => ['required', 'integer',],
+            'short_name' => ['required', 'string', 'max:25'],
+            'name' => ['required', 'string', 'max:50'],
+            'start_price' => ['required', 'integer'],
+            'short_desc' => ['required', 'string', 'max:100'],
+            'desc' => ['required', 'string'],
+            'image_url' => ['required', 'string'],
+            'animation_url' => ['string'],
+            'type' => ['required', 'string', 'max:25'],
+            'model_position' => ['required', 'numeric', 'max:3'],
         ];
     }
 }

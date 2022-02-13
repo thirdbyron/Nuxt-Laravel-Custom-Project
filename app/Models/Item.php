@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'category_id', 'short_name', 'name', 'start_price', 'short_desc', 'desc', 'image_url', 'animation_url', 'type' ];
+    protected $fillable = [ 'category_id', 'short_name', 'name', 'start_price', 'short_desc', 'desc', 'image_url', 'animation_url', 'type', 'model_position' ];
 
     public function sizes() {
         return $this->hasMany(Size::class);

@@ -22,7 +22,6 @@ class CreateDefaultsTable extends Migration
             $table->string( 'model_type', 50);
             $table->text('model_path');
             $table->string( 'color', 9 );
-            $table->text('model_path');
             $table->timestamps();
         });
     }
