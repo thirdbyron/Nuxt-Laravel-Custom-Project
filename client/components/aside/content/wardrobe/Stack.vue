@@ -256,9 +256,9 @@ export default {
           controls.enablePan = false;
           controls.screenSpacePanning = true;
           controls.enableRotate = true;
-          controls.minPolarAngle = Math.PI / 2.2; //Math.PI/2;
-          controls.maxPolarAngle = Math.PI / 1.8; //Math.PI/2;
-          controls.target.set( 0, 1, 0 );
+          controls.minPolarAngle = Math.PI / 3;
+          controls.maxPolarAngle = Math.PI / 1.5;
+          controls.target.set(0, 1, 0);
 
           let inst = this;
           var apiItem = this.wardrobe.filter(function (item) {
@@ -323,12 +323,21 @@ export default {
             "/models/" + item.model_path + "/" + item.model_name + ".glb",
             function (gltf) {
               let model = gltf.scene.children[0];
+              const color = item.color.slice(1);
 
               //model.geometry.computeBoundingSphere();
               //const modelPosInAir = model.geometry.boundingSphere.center;
-              console.log(model, apiElement);
-              
-              model.position.set(0, -1.45 * apiElement.model_position, 0);
+              console.log(model, apiElement[0], item.color);
+
+              if (model.children.length > 0) {
+                model.children.forEach(async function (mesh) {
+                  mesh.material.color.setHex("0x" + color);
+                });
+              } else {
+                model.material.color.setHex("0x" + color);
+              }
+
+              model.position.set(0, -1.45 * apiElement[0].model_position, 0);
               //model.rotation.set(90, 0, 0);
               gltf.scene.scale.set(10, 10, 10);
               scene.add(gltf.scene);
