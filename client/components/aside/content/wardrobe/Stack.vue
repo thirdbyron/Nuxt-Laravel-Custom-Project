@@ -326,9 +326,9 @@ export default {
 
               //model.geometry.computeBoundingSphere();
               //const modelPosInAir = model.geometry.boundingSphere.center;
-              console.log(model);
+              console.log(model, apiElement);
               
-              model.position.set(0, -1.45 * 0.1, 0);
+              model.position.set(0, -1.45 * apiElement.model_position, 0);
               //model.rotation.set(90, 0, 0);
               gltf.scene.scale.set(10, 10, 10);
               scene.add(gltf.scene);

@@ -1,0 +1,44 @@
+{
+            "id": 1,
+            "short_name": "Футболка1",
+            "name": "Футболка х/б",
+            "start_price": 1300,
+            "short_desc": "100% хлопок",
+            "desc": "Футболка 100% х/б",
+            "image_url": "assets/media/img/std_tshirt.png",
+            "animation_url": "assets/media/video/animations/std_tshirt.mp4",
+            "type": "body",
+            "model_position": 1,
+            "sizes": [],
+            "defaults": [
+                {
+                    "id": 1,
+                    "item_id": 1,
+                    "name": "Длинный перед",
+                    "type": "Длинный v-образный перед",
+                    "model_name": "long",
+                    "model_type": "t-shirt",
+                    "model_path": "clothes/maneken/man/pose 1/basic/t-shirt/Pryamoi style/Settings/Elements/Virez + dlina/V/PERED",
+                    "color": "#000fff",
+                    "created_at": "2022-02-13T11:56:21.000000Z",
+                    "updated_at": "2022-02-13T11:56:21.000000Z"
+                },
+                {
+                    "id": 2,
+                    "item_id": 1,
+                    "name": "Стандартный зад",
+                    "type": "Стандартный v-образный зад",
+                    "model_name": "standart",
+                    "model_type": "t-shirt",
+                    "model_path": "clothes/maneken/man/pose 1/basic/t-shirt/Pryamoi style/Settings/Elements/Virez + dlina/V/SPINA",
+                    "color": "#000fff",
+                    "created_at": "2022-02-13T11:59:29.000000Z",
+                    "updated_at": "2022-02-13T11:59:29.000000Z"
+                }
+            ],
+            "settings": {
+                "elements": [],
+                "colors": [],
+                "pictures": []
+            }
+        }
