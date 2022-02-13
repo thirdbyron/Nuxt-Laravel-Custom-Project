@@ -133,7 +133,7 @@ export default {
     },
     show: function (item) {
       if (this.editedItem !== item.index) {
-        console.log(item);
+        //console.log(item);
         this.setActiveType(item);
       }
     },
@@ -156,7 +156,7 @@ export default {
       }
     },
     toCart: function (item) {
-      console.log(item);
+      //console.log(item);
       this.$store.commit("cart/add", item);
     },
     remove: function (item) {
@@ -218,11 +218,13 @@ export default {
       });
     },
 
-    initModels: function ( domElements ) {
+    initModels: function (domElements = []) {
       try {
-
         domElements.forEach((element) => {
           //this.initModelScene(element);
+          //console.log(element.children.length);
+          //console.log(element.innerHTML);
+          //if( element.children.length >= 1 ) element.innerHTML = '';
 
           let global = this.global;
 
@@ -251,11 +253,14 @@ export default {
           controls.enableZoom = false;
           controls.enablePan = false;
 
+          let inst = this;
           var apiItem = this.wardrobe.filter(function (item) {
+            console.log(inst.wardrobe[2], item.id, element.id);
             if (item.id == element.id.replace(/\D/g, "")) {
               return item;
             }
           });
+          console.log(apiItem);
 
           this.loadModel(apiItem, scene);
 
@@ -289,20 +294,19 @@ export default {
     },
 
     animate: function (controls, renderer, scene, camera) {
-      try{
+      try {
         requestAnimationFrame(() => {
           //console.log(renderer);
           renderer.render(scene, camera);
           controls.update();
           this.animate(controls, renderer, scene, camera);
         });
-      }
-      catch (error) {
+      } catch (error) {
         console.log(error);
       }
     },
     loadModel: function (apiElement, scene) {
-      console.log(apiElement, scene);
+      //console.log(apiElement, scene);
 
       try {
         const loader = new GLTFLoader();
@@ -312,7 +316,7 @@ export default {
           loader.load(
             "/models/" + item.model_path + "/" + item.model_name + ".glb",
             function (gltf) {
-              console.log(gltf.scene.children);
+              //console.log(gltf.scene.children);
               gltf.scene.children[0].position.set(0, -1.2, 0);
               gltf.scene.scale.set(10, 10, 10);
               scene.add(gltf.scene);
@@ -335,6 +339,19 @@ export default {
     this.$nextTick(() => {
       this.initModels(document.querySelectorAll(".item-image"));
     });
+  },
+
+  watch: {
+    wardrobe: function (newWardrobe, oldWardrobe) {
+      this.$nextTick(
+        async function () {
+          if (newWardrobe.length < oldWardrobe.length) return;
+          const items = await document.querySelectorAll(".item-image");
+          //console.log({ items, newWardrobe });
+          await this.initModels([items[items.length - 1]]);
+        }
+      );
+    },
   },
 };
 </script>
