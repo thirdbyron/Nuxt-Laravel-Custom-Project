@@ -259,15 +259,18 @@ export default {
           controls.minPolarAngle = Math.PI / 3;
           controls.maxPolarAngle = Math.PI / 1.5;
           controls.target.set(0, 1, 0);
+          controls.enableDamping = true;
+          controls.dampingFactor = 0.04;
+          controls.rotateSpeed = 0.4;
 
           let inst = this;
           var apiItem = this.wardrobe.filter(function (item) {
-            console.log(inst.wardrobe[2], item.id, element.id);
+           //console.log(inst.wardrobe[2], item.id, element.id);
             if (item.id == element.id.replace(/\D/g, "")) {
               return item;
             }
           });
-          console.log(apiItem);
+          //console.log(apiItem);
 
           this.loadModel(apiItem, scene);
 
@@ -295,14 +298,14 @@ export default {
           this.loadModel(domElement, apiElement);
         });*/
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
 
     animate: function (controls, renderer, scene, camera) {
       try {
         requestAnimationFrame(() => {
-          //console.log(renderer);
+          console.log(controls);
           renderer.render(scene, camera);
           controls.update();
           this.animate(controls, renderer, scene, camera);
@@ -316,9 +319,9 @@ export default {
 
       try {
         const loader = new GLTFLoader();
-
+        //console.log(apiElement[0]);
         apiElement[0].defaults.forEach((item) => {
-          console.log(item);
+          //console.log(item);
           loader.load(
             "/models/" + item.model_path + "/" + item.model_name + ".glb",
             function (gltf) {
@@ -327,7 +330,7 @@ export default {
 
               //model.geometry.computeBoundingSphere();
               //const modelPosInAir = model.geometry.boundingSphere.center;
-              console.log(model, apiElement[0], item.color);
+              //console.log(model, apiElement[0], item.color);
 
               if (model.children.length > 0) {
                 model.children.forEach(async function (mesh) {
@@ -336,7 +339,7 @@ export default {
               } else {
                 model.material.color.setHex("0x" + color);
               }
-
+              
               model.position.set(0, -1.45 * apiElement[0].model_position, 0);
               //model.rotation.set(90, 0, 0);
               gltf.scene.scale.set(10, 10, 10);
@@ -365,8 +368,10 @@ export default {
   watch: {
     wardrobe: function (newWardrobe, oldWardrobe) {
       this.$nextTick(async function () {
+        //console.log(newWardrobe.length, oldWardrobe.length);
         if (newWardrobe.length < oldWardrobe.length) return;
         const items = await document.querySelectorAll(".item-image");
+        //console.log(items);
         //console.log({ items, newWardrobe });
         await this.initModels([items[items.length - 1]]);
       });
