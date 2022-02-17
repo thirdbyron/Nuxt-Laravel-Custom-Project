@@ -13,12 +13,12 @@ class CreateRelativeModelPathsTable extends Migration
      */
     public function up()
     {
-        Schema::create('relative_model_paths', function (Blueprint $table) {
+        /*Schema::create('relative_model_paths', function (Blueprint $table) {
             $table->id();
             $table->string( 'model_category', 25 );
             $table->text('relative_model_url');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**

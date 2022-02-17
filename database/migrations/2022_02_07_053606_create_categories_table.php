@@ -15,6 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('gender_id')->constrained('genders')->cascadeOnDelete();
             $table->string('category_name');
             $table->timestamps();
         });

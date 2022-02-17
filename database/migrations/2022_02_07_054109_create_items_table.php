@@ -15,7 +15,8 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->string('item_type');
             $table->string('short_name', 25);
             $table->string('name', 50);
             $table->integer('start_price');
@@ -23,8 +24,9 @@ class CreateItemsTable extends Migration
             $table->text('desc');
             $table->text('image_url');
             $table->text('animation_url')->nullable();
-            $table->string('type', 25);
+            //$table->string('type', 25);
             $table->float('model_position', 1, 1);
+            $table->boolean('in_stock');
             $table->timestamps();
         });
     }
