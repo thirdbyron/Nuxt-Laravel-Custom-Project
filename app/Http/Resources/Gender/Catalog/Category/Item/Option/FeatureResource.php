@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Gender\Catalog;
+namespace App\Http\Resources\Gender\Catalog\Category\Item\Option;
 
-use App\Http\Resources\Gender\Catalog\Category\ItemResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class FeatureResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +14,9 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-        //dd($this);
         return [
-            'id' => $this->id,
-            'category_name' => $this->category_name,
-            'items' => ItemResource::collection($this->items),
+            'option_id' => $this->option_id,
+            'name' => $this->name,
         ];
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\FeatureController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\OptionController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\SectionController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\SizeController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\ItemController;
 use App\Http\Controllers\Api\Gender\Catalog\CategoryController;
 use App\Http\Controllers\Api\Gender\CatalogController;
@@ -23,11 +27,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('api')->group(function () {
+
     Route::apiResource('genders', GenderController::class);
+
     Route::apiResource('gender/catalogs', CatalogController::class);
+
     Route::apiResource('gender/catalog/categories', CategoryController::class);
+
     Route::apiResource('gender/catalog/category/items', ItemController::class);
 
-    Route::get('gender/catalog/categories/item', function () {
+    //Route::apiResource('gender/catalog/category/item/sizes', SizeController::class);
+
+    Route::prefix('gender/catalog/category/item')->group(function () {
+
+        Route::apiResource('/sizes', SizeController::class);
+
+        Route::apiResource('/sections', SectionController::class);
+
+        Route::apiResource('/options', OptionController::class);
+
+        Route::prefix('option')->group(function () {
+            Route::apiResource('/features', FeatureController::class);
+        });
     });
 });

@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources\Gender\Catalog\Category;
 
+use App\Http\Resources\Gender\Catalog\Category\Item\OptionResource;
+use App\Http\Resources\Gender\Catalog\Category\Item\SectionResource;
+use App\Http\Resources\Gender\Catalog\Category\Item\SizeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ItemResource extends JsonResource
@@ -25,6 +28,11 @@ class ItemResource extends JsonResource
             'animation_url' => $this->animation_url,
             'model_position' => $this->model_position,
             'in_stock' => $this->in_stock,
+            'settings' => [
+                'sizes' => SizeResource::collection($this->sizes),
+                'sections' => SectionResource::collection($this->sections),
+                'options' => OptionResource::collection($this->options),
+            ],
         ];
     }
 }
