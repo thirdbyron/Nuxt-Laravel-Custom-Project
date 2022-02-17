@@ -25,6 +25,7 @@ class ItemRequest extends FormRequest
     {
         return [
             'category_id' => ['required', 'integer',],
+            'item_type' => ['required', 'string'],
             'short_name' => ['required', 'string', 'max:25'],
             'name' => ['required', 'string', 'max:50'],
             'start_price' => ['required', 'integer'],
@@ -32,7 +33,6 @@ class ItemRequest extends FormRequest
             'desc' => ['required', 'string'],
             'image_url' => ['required', 'string'],
             'animation_url' => ['string'],
-            'type' => ['required', 'string', 'max:25'],
             'model_position' => ['required', 'numeric', 'max:3'],
         ];
     }

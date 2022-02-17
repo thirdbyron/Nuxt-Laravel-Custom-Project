@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Gender\Catalog\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ItemResource;
-use App\Models\Item;
-use App\Http\Requests\ItemRequest;
+use App\Http\Requests\Gender\Catalog\Category\ItemRequest;
+use App\Http\Resources\Gender\Catalog\Category\ItemResource;
+use App\Models\Gender\Catalog\Category\Item;
 
 class ItemController extends Controller
 {
@@ -34,7 +34,7 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Gender\Catalog\Category\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function show(Item $item)
@@ -46,21 +46,19 @@ class ItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\ItemRequest  $request
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Gender\Catalog\Category\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function update(ItemRequest $request, Item $item)
     {
         $item->update($request->validated());
-        //dd($request->validated(), new ItemResource($item));
-        //dd($item->update($request->validated()));
         return new ItemResource($item);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Gender\Catalog\Category\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function destroy(Item $item)

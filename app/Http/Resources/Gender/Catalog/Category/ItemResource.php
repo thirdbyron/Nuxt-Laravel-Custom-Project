@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Gender\Catalog\Category;
 
-use App\Http\Resources\item\SizeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ItemResource extends JsonResource
@@ -15,10 +14,8 @@ class ItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        //dd($request->item_id);
-        //dd(parent::toArray($request));
         return [
-            'id' => $this->id,
+            'item_type' => $this->item_type,
             'short_name' => $this->short_name,
             'name' => $this->name,
             'start_price' => $this->start_price,
@@ -27,16 +24,7 @@ class ItemResource extends JsonResource
             'image_url' => $this->image_url,
             'animation_url' => $this->animation_url,
             'model_position' => $this->model_position,
-            'settings' => [
-                'sizes' => SizeResource::collection($this->sizes)
-            ]
-            /*'sizes' => SizeResource::collection($this->sizes),
-            'defaults' => DefaultsResource::collection($this->defaults),
-            'settings' => [
-                'elements' => ElementResource::collection($this->elements),
-                'colors' => ColorResource::collection($this->colors),
-                'pictures' => PictureResource::collection($this->pictures)
-            ],*/
+            'in_stock' => $this->in_stock,
         ];
     }
 }

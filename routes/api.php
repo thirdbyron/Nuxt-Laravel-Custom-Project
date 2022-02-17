@@ -1,13 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\Item\DefaultsController;
-use App\Http\Controllers\Api\Item\Settings\ColorController;
-use App\Http\Controllers\Api\Item\Settings\ElementController;
-use App\Http\Controllers\Api\Item\Settings\Option\OptionController;
-use App\Http\Controllers\Api\Item\Settings\PictureController;
-use App\Http\Controllers\Api\Item\SizeController;
-use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\ItemController;
+use App\Http\Controllers\Api\Gender\Catalog\CategoryController;
+use App\Http\Controllers\Api\Gender\CatalogController;
+use App\Http\Controllers\Api\GenderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('api')->group(function () {
-    Route::apiResource( 'categories', CategoryController::class );
-    Route::apiResource( 'items', ItemController::class );
-    Route::apiResource( 'item/defaults', DefaultsController::class );
-    Route::apiResource( 'item/sizes', SizeController::class );
-    Route::apiResource( 'item/settings/colors', ColorController::class );
-    Route::apiResource( 'item/settings/elements', ElementController::class );
-    Route::apiResource( 'item/settings/pictures', PictureController::class );
-    Route::apiResource( 'item/settings/options', OptionController::class );
+    Route::apiResource('genders', GenderController::class);
+    Route::apiResource('gender/catalogs', CatalogController::class);
+    Route::apiResource('gender/catalog/categories', CategoryController::class);
+    Route::apiResource('gender/catalog/category/items', ItemController::class);
+
+    Route::get('gender/catalog/categories/item', function () {
+    });
 });
