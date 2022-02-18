@@ -2,6 +2,7 @@
 
 namespace App\Models\Gender\Catalog\Category;
 
+use App\Models\Gender\Catalog\Category\Item\FabricSet;
 use App\Models\Gender\Catalog\Category\Item\Option;
 use App\Models\Gender\Catalog\Category\Item\Section;
 use App\Models\Gender\Catalog\Category\Item\Size;
@@ -22,10 +23,10 @@ class Item extends Model
     public function options() {
         return $this->hasMany(Option::class);
     }
-    /*public function defaults() {
-        return $this->hasMany(Defaults::class);
+    public function fabricSets() {
+        return $this->hasMany(FabricSet::class);
     }
-
+    /*
     public function elements() {
         return $this->hasMany(Element::class);
     }

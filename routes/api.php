@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\ElementController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\FeatureController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\Element\ModelController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSetController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSet\FabricController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\OptionController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\SectionController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\SizeController;
@@ -46,8 +50,18 @@ Route::middleware('api')->group(function () {
 
         Route::apiResource('/options', OptionController::class);
 
+        Route::apiResource('/fabric_sets', FabricSetController::class);
+
+        Route::apiResource('/fabric_set/fabrics', FabricController::class);
+
         Route::prefix('option')->group(function () {
+
             Route::apiResource('/features', FeatureController::class);
+
+            Route::apiResource('/elements', ElementController::class);
+
+            Route::apiResource('/element/models', ModelController::class);
+
         });
     });
 });

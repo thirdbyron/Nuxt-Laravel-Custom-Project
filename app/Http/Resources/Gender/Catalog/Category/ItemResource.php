@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Gender\Catalog\Category;
 
+use App\Http\Resources\Gender\Catalog\Category\Item\FabricSetResource;
 use App\Http\Resources\Gender\Catalog\Category\Item\OptionResource;
 use App\Http\Resources\Gender\Catalog\Category\Item\SectionResource;
 use App\Http\Resources\Gender\Catalog\Category\Item\SizeResource;
@@ -18,6 +19,7 @@ class ItemResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'item_type' => $this->item_type,
             'short_name' => $this->short_name,
             'name' => $this->name,
@@ -32,6 +34,7 @@ class ItemResource extends JsonResource
                 'sizes' => SizeResource::collection($this->sizes),
                 'sections' => SectionResource::collection($this->sections),
                 'options' => OptionResource::collection($this->options),
+                'fabric_sets' => FabricSetResource::collection($this->fabricSets),
             ],
         ];
     }
