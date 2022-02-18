@@ -4,6 +4,7 @@ namespace App\Models\Gender\Catalog\Category;
 
 use App\Models\Gender\Catalog\Category\Item\FabricSet;
 use App\Models\Gender\Catalog\Category\Item\Option;
+use App\Models\Gender\Catalog\Category\Item\PicturePosition;
 use App\Models\Gender\Catalog\Category\Item\Section;
 use App\Models\Gender\Catalog\Category\Item\Size;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,10 +27,11 @@ class Item extends Model
     public function fabricSets() {
         return $this->hasMany(FabricSet::class);
     }
-    /*
-    public function elements() {
-        return $this->hasMany(Element::class);
+    
+    public function picturePositions() {
+        return $this->hasMany(PicturePosition::class);
     }
+    /*
     public function colors() {
         return $this->hasMany(Color::class);
     }

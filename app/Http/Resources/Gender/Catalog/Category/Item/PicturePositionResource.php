@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources\Gender\Catalog\Category\Item;
 
-use App\Http\Resources\Gender\Catalog\Category\Item\Option\ElementResource;
 use App\Http\Resources\Gender\Catalog\Category\Item\Option\FeatureResource;
+use App\Http\Resources\Gender\Catalog\Category\Item\PicturePosition\PictureSetResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OptionResource extends JsonResource
+class PicturePositionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,16 +18,11 @@ class OptionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'section_name' => $this->section_name,
-            'settings' => $this->settings,
+            'item_id' => $this->item_id,
             'name' => $this->name,
-            'price' => $this->price,
             'image_url' => $this->image_url,
-            'in_stock' => $this->in_stock,
-            'image_url' => $this->image_url,
-            'order_name' => $this->order_name,
-            'features' => FeatureResource::collection($this->features),
-            'elements' => ElementResource::collection($this->elements),
+            'relate_to_option' => $this->relate_to_option,
+            'picture_sets' => PictureSetResource::collection($this->pictureSets),
         ];
     }
 }

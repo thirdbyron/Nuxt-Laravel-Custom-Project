@@ -17,17 +17,16 @@ class ModelRequest extends FormRequest
 
     public function rules()
     {
-        //dd($this->all());
         return $this->serviceRules(
             [
                 'element_id' => ['required', 'integer'],
-                'model_name' => ['required', 'max:50'],
+                'model_name' => ['required', 'string', 'max:50'],
                 'model_path' => ['required', 'string'],
             ],
 
             [
                 'element_id' => ['integer'],
-                'model_name' => ['max:50'],
+                'model_name' => ['string', 'max:50'],
                 'model_path' => ['string'],
             ],
         );

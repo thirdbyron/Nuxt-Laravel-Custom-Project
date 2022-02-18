@@ -10,7 +10,8 @@ class ModelOf extends Model
     use HasFactory;
 
     protected $fillable = [
-        'item_id', 'section_name',
-        'settings', 'name', 'price', 'in_stock', 'image_url', 'order_name'
+        'element_id',
+        'model_path',
+        'model_name',
     ];
 }

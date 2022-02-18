@@ -5,7 +5,11 @@ use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\FeatureControll
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\Element\ModelController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSetController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSet\FabricController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSet\TextureController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\OptionController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\PicturePosition\PictureSetController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\PicturePosition\PictureController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\PicturePositionController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\SectionController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\SizeController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\ItemController;
@@ -52,7 +56,19 @@ Route::middleware('api')->group(function () {
 
         Route::apiResource('/fabric_sets', FabricSetController::class);
 
-        Route::apiResource('/fabric_set/fabrics', FabricController::class);
+        Route::apiResource('/picture_positions', PicturePositionController::class);
+
+        Route::apiResource('/picture_position/picture_sets', PictureSetController::class);
+
+        Route::apiResource('/picture_position/picture_set/pictures', PictureController::class);
+
+        Route::prefix('fabric_set')->group(function () {
+
+            Route::apiResource('/fabrics', FabricController::class);
+
+            Route::apiResource('/textures', TextureController::class);
+
+        });
 
         Route::prefix('option')->group(function () {
 

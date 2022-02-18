@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Gender\Catalog\Category\Item\Option\Element;
+namespace App\Http\Resources\Gender\Catalog\Category\Item\PicturePosition;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ModelResource extends JsonResource
+class PictureResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

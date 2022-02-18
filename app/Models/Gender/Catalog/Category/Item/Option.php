@@ -2,6 +2,7 @@
 
 namespace App\Models\Gender\Catalog\Category\Item;
 
+use App\Models\Gender\Catalog\Category\Item\Option\Element;
 use App\Models\Gender\Catalog\Category\Item\Option\Feature;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,5 +18,9 @@ class Option extends Model
 
     public function features() {
         return $this->hasMany(Feature::class);
+    }
+
+    public function elements() {
+        return $this->hasMany(Element::class);
     }
 }

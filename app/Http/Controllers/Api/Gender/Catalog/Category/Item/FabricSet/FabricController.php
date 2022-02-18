@@ -23,28 +23,28 @@ class FabricController extends Controller
         $this->model = new Fabric();
     }
 
-    public function index(Fabric $element)
+    public function index(Fabric $fabric)
     {
-        return $this->serviceIndex($this->resource, $element);
+        return $this->serviceIndex($this->resource, $fabric);
     }
 
-    public function store(FabricRequest $request, Fabric $element)
+    public function store(FabricRequest $request, Fabric $fabric)
     {
-        return $this->serviceStore($request, $this->resource, $element);
+        return $this->serviceStore($request, $this->resource, $fabric);
     }
 
-    public function show(Fabric $element)
+    public function show(Fabric $fabric)
     {
-        return $this->serviceShow($this->resource, $element);
+        return $this->serviceShow($this->resource, $fabric);
     }
 
-    public function update(FabricRequest $request, Fabric $element)
+    public function update(FabricRequest $request, Fabric $fabric)
     {
-        return $this->serviceUpdate($request, $this->resource, $element);
+        return $this->serviceUpdate($request, $this->resource, $fabric);
     }
 
-    public function destroy(Fabric $element)
+    public function destroy(Fabric $fabric)
     {
-        return $this->serviceDestroy($element);
+        return $this->serviceDestroy($fabric);
     }
 }

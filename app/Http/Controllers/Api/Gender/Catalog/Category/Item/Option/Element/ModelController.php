@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\Element;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Gender\Catalog\Category\Item\Option\Element\ModelRequest;
-use App\Http\Resources\Gender\Catalog\Category\Item\Option\Element\ModelResource;
+use App\Http\Resources\Gender\Catalog\Category\Item\Option\Element\ModelOfResource;
 use App\Models\Gender\Catalog\Category\Item\Option\Element\ModelOf;
 use App\Service\Resource;
 
@@ -19,7 +19,7 @@ class ModelController extends Controller
     public function __construct()
     {
         $this->request = new ModelRequest();
-        $this->resource = new ModelResource($this->request);
+        $this->resource = new ModelOfResource($this->request);
         $this->model = new ModelOf();
     }
 

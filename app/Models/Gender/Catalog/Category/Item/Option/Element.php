@@ -2,6 +2,7 @@
 
 namespace App\Models\Gender\Catalog\Category\Item\Option;
 
+use App\Models\Gender\Catalog\Category\Item\Option\Element\ModelOf;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,4 +13,8 @@ class Element extends Model
     protected $fillable = [
         'option_id', 'feature_id'
     ];
+
+    public function modelOfs() {
+        return $this->hasMany(ModelOf::class);
+    }
 }

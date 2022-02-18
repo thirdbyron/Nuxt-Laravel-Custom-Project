@@ -15,7 +15,7 @@ class CreatePicturesTable extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('picture_id')->constrained('pictures')->cascadeOnDelete();
+            $table->foreignId('picture_set_id')->constrained('picture_sets')->cascadeOnDelete();
             $table->string('name');
             $table->integer('price')->nullable();
             $table->boolean('in_stock');

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Gender\Catalog\Category\Item\Option;
+namespace App\Http\Resources\Gender\Catalog\Category\Item\PicturePosition;
 
-use App\Http\Resources\Gender\Catalog\Category\Item\Option\Element\ModelOfResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ElementResource extends JsonResource
+class PictureSetResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,9 @@ class ElementResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'option_id' => $this->option_id,
-            'feature_id' => $this->feature_id,
-            'models' => ModelOfResource::collection($this->modelOfs),
+            'picture_position_id' => $this->picture_position_id,
+            'name' => $this->name,
+            'pictures' => PictureResource::collection($this->pictures),
         ];
     }
 }

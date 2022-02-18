@@ -4,6 +4,7 @@ namespace App\Http\Resources\Gender\Catalog\Category;
 
 use App\Http\Resources\Gender\Catalog\Category\Item\FabricSetResource;
 use App\Http\Resources\Gender\Catalog\Category\Item\OptionResource;
+use App\Http\Resources\Gender\Catalog\Category\Item\PicturePositionResource;
 use App\Http\Resources\Gender\Catalog\Category\Item\SectionResource;
 use App\Http\Resources\Gender\Catalog\Category\Item\SizeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -35,6 +36,7 @@ class ItemResource extends JsonResource
                 'sections' => SectionResource::collection($this->sections),
                 'options' => OptionResource::collection($this->options),
                 'fabric_sets' => FabricSetResource::collection($this->fabricSets),
+                'picture_positions' => PicturePositionResource::collection($this->picturePositions),
             ],
         ];
     }
