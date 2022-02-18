@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PrintPosition extends Model
+class Dummy extends Model
 {
     use HasFactory;
+
+    protected $fillable = [ 'gender_id', 'pose_name', 'dummy_model' ];
 }

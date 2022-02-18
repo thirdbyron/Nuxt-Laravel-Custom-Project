@@ -22,7 +22,7 @@ trait Resource
 
     public function serviceUpdate($request, $resource, $model)
     {
-        dd($model->update($request->validated()));
+        //dd($model->update($request->validated()));
         $model->update($request->validated());
         return new $resource($model);
     }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\BackgroundController;
+use App\Http\Controllers\Api\DummyController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\ElementController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\FeatureController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\Element\ModelController;
@@ -36,7 +38,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('api')->group(function () {
 
+    Route::apiResource('dummies', DummyController::class);
+
+    Route::apiResource('backgrounds', BackgroundController::class);
+
     Route::apiResource('genders', GenderController::class);
+    
 
     Route::apiResource('gender/catalogs', CatalogController::class);
 

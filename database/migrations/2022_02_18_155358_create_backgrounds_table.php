@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePicturesTable extends Migration
+class CreateBackgroundsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreatePicturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pictures', function (Blueprint $table) {
+        Schema::create('backgrounds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('picture_set_id')->constrained('picture_sets')->cascadeOnDelete();
             $table->string('name');
-            $table->integer('price')->nullable();
-            $table->string('in_stock', 25);
-            $table->boolean('settings');
-            $table->string('order_name');
+            $table->text('image_url');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreatePicturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pictures');
+        Schema::dropIfExists('backgrounds');
     }
 }
