@@ -22,12 +22,14 @@ class ModelRequest extends FormRequest
                 'element_id' => ['required', 'integer'],
                 'model_name' => ['required', 'string', 'max:50'],
                 'model_path' => ['required', 'string'],
+                'articule' => ['required', 'string'],
             ],
 
             [
                 'element_id' => ['integer'],
                 'model_name' => ['string', 'max:50'],
                 'model_path' => ['string'],
+                'articule' => ['string'],
             ],
         );
     }

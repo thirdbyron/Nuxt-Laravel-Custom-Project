@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModelOfsTable extends Migration
+class CreateSizeTablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateModelOfsTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_ofs', function (Blueprint $table) {
+        Schema::create('size_tables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('element_id')->constrained('elements')->cascadeOnDelete();
-            $table->string('model_name');
-            $table->text('model_path');
-            $table->string('articule');
+            $table->foreignId('gender_id')->constrained('genders')->cascadeOnDelete();
+            $table->text('image');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateModelOfsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('models');
+        Schema::dropIfExists('size_tables');
     }
 }

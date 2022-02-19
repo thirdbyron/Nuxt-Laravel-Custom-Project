@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Gender\Catalog\Category\Item;
 
+use App\Http\Resources\Gender\Catalog\Category\Item\Option\ElementResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SectionResource extends JsonResource
@@ -14,6 +15,10 @@ class SectionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'name' => $this->name,
+            'elements' => ElementResource::collection($this->elements),
+            'options' => OptionResource::collection($this->options),
+        ];
     }
 }

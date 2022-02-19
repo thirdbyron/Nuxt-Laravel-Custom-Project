@@ -27,6 +27,7 @@ class PicturePositionController extends Controller
      */
     public function store(PicturePositionRequest $request)
     {
+        //dd($request->all());
         $feature = PicturePosition::create($request->validated());
         return new PicturePositionResource($feature);
     }

@@ -16,5 +16,6 @@ class Picture extends Model
         'in_stock',
         'settings',
         'order_name',
+        'articule',
     ];
 }

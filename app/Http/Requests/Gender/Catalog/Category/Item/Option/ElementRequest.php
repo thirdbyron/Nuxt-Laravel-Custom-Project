@@ -20,11 +20,13 @@ class ElementRequest extends FormRequest
         //dd($this->all());
         return $this->serviceRules(
             [
+                'section_id' => ['required', 'integer'],
                 'option_id' => ['required', 'integer'],
                 'feature_id' => ['required', 'integer'],
             ],
 
             [
+                'section_id' => ['integer'],
                 'option_id' => ['integer'],
                 'feature_id' => ['integer'],
             ],

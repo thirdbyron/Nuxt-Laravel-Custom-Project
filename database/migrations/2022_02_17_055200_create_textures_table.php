@@ -15,11 +15,12 @@ class CreateTexturesTable extends Migration
     {
         Schema::create('textures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fabric_id')->constrained('fabrics');
-            $table->foreignId('model_id')->constrained('models')->cascadeOnDelete();
+            $table->foreignId('fabric_model_id')->constrained('fabric_models');
+            $table->foreignId('dummy_id')->constrained('dummies')->cascadeOnDelete();
             $table->string('texture_name');
             $table->text('texture_path');
             $table->string('texture_mimetype', 10);
+            $table->string('articule');
             $table->timestamps();
         });
     }

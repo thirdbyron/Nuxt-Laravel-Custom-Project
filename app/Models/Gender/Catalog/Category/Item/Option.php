@@ -2,7 +2,6 @@
 
 namespace App\Models\Gender\Catalog\Category\Item;
 
-use App\Models\Gender\Catalog\Category\Item\Option\Element;
 use App\Models\Gender\Catalog\Category\Item\Option\Feature;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,15 +11,11 @@ class Option extends Model
     use HasFactory;
     
     protected $fillable = [
-        'item_id', 'section_name',
+        'section_id', 'section_name',
         'settings', 'name', 'price', 'in_stock', 'image_url', 'order_name'
     ];
 
     public function features() {
         return $this->hasMany(Feature::class);
-    }
-
-    public function elements() {
-        return $this->hasMany(Element::class);
     }
 }

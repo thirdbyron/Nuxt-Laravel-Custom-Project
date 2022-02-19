@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\FeatureControll
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\Element\ModelController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSetController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSet\FabricController;
+use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSet\FabricModelController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\FabricSet\TextureController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\OptionController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\PicturePosition\PictureSetController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Api\Gender\Catalog\Category\ItemController;
 use App\Http\Controllers\Api\Gender\Catalog\CategoryController;
 use App\Http\Controllers\Api\Gender\CatalogController;
 use App\Http\Controllers\Api\GenderController;
+use App\Http\Controllers\Api\SizeTableController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,7 +53,7 @@ Route::middleware('api')->group(function () {
 
     Route::apiResource('gender/catalog/category/items', ItemController::class);
 
-    //Route::apiResource('gender/catalog/category/item/sizes', SizeController::class);
+    Route::apiResource('size_tables', SizeTableController::class);
 
     Route::prefix('gender/catalog/category/item')->group(function () {
 
@@ -65,15 +67,17 @@ Route::middleware('api')->group(function () {
 
         Route::apiResource('/picture_positions', PicturePositionController::class);
 
-        Route::apiResource('/picture_position/picture_sets', PictureSetController::class);
-
         Route::apiResource('/picture_position/picture_set/pictures', PictureController::class);
+
+        Route::apiResource('/picture_position/picture_sets', PictureSetController::class);
 
         Route::prefix('fabric_set')->group(function () {
 
             Route::apiResource('/fabrics', FabricController::class);
 
-            Route::apiResource('/textures', TextureController::class);
+            Route::apiResource('/fabric_models', FabricModelController::class);
+
+            Route::apiResource('/fabric_model/textures', TextureController::class);
 
         });
 

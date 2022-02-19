@@ -34,7 +34,6 @@ class ItemResource extends JsonResource
             'settings' => [
                 'sizes' => SizeResource::collection($this->sizes),
                 'sections' => SectionResource::collection($this->sections),
-                'options' => OptionResource::collection($this->options),
                 'fabric_sets' => FabricSetResource::collection($this->fabricSets),
                 'picture_positions' => PicturePositionResource::collection($this->picturePositions),
             ],

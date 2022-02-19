@@ -13,5 +13,6 @@ class ModelOf extends Model
         'element_id',
         'model_path',
         'model_name',
+        'articule',
     ];
 }

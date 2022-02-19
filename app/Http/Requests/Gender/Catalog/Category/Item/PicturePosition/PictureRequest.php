@@ -24,8 +24,9 @@ class PictureRequest extends FormRequest
                 'name' => ['required', 'string', 'max:50'],
                 'price' => ['required', 'integer'],
                 'in_stock' => ['required', 'integer', 'max:1'],
-                'settings' => ['required', 'string', 'max:50'],
+                'settings' => ['required', 'integer', 'max:1'],
                 'order_name' => ['required', 'string', 'max:25'],
+                'articule' => ['required', 'string'],
             ],
 
             [
@@ -33,8 +34,9 @@ class PictureRequest extends FormRequest
                 'name' => ['string', 'max:50'],
                 'price' => ['integer'],
                 'in_stock' => ['integer', 'max:1'],
-                'settings' => ['string', 'max:50'],
+                'settings' => ['integer', 'max:1'],
                 'order_name' => ['string', 'max:25'],
+                'articule' => ['string'],
             ],
         );
     }

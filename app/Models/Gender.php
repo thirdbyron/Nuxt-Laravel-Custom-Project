@@ -15,4 +15,9 @@ class Gender extends Model
     public function catalogs() {
         return $this->hasMany(Catalog::class);
     }
+
+    public function sizeTable() {
+
+        return $this->hasOne(SizeTable::class);
+    }
 }

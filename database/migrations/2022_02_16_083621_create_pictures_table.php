@@ -21,6 +21,7 @@ class CreatePicturesTable extends Migration
             $table->string('in_stock', 25);
             $table->boolean('settings');
             $table->string('order_name');
+            $table->string('articule');
             $table->timestamps();
         });
     }

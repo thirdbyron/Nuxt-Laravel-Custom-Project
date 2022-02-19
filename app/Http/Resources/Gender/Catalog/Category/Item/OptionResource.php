@@ -18,7 +18,6 @@ class OptionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'section_name' => $this->section_name,
             'settings' => $this->settings,
             'name' => $this->name,
             'price' => $this->price,
@@ -27,7 +26,6 @@ class OptionResource extends JsonResource
             'image_url' => $this->image_url,
             'order_name' => $this->order_name,
             'features' => FeatureResource::collection($this->features),
-            'elements' => ElementResource::collection($this->elements),
         ];
     }
 }

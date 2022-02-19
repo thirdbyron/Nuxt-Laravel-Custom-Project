@@ -25,9 +25,8 @@ class OptionRequest extends FormRequest
     {
         if ($this->method() != 'PATCH')
             return [
-                'item_id' => ['required', 'integer'],
-                'section_name' => ['required', 'string'],
-                'settings' => ['string', 'max:25'],
+                'section_id' => ['required', 'integer'],
+                'settings' => ['required', 'integer', 'max:1'],
                 'name' => ['required', 'string'],
                 'price' => ['integer'],
                 'image_url' => ['required', 'string'],
@@ -36,9 +35,8 @@ class OptionRequest extends FormRequest
             ];
         else
             return [
-                'item_id' => ['integer'],
-                'section_name' => ['string'],
-                'settings' => ['string', 'max:25'],
+                'section_id' => ['integer'],
+                'settings' => ['integer', 'max:1'],
                 'name' => ['string'],
                 'price' => ['integer'],
                 'image_url' => ['string'],

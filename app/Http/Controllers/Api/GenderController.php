@@ -16,6 +16,7 @@ class GenderController extends Controller
      */
     public function index()
     {
+        //dd(GenderResource::collection(Gender::all()));
         return GenderResource::collection(Gender::all());
     }
 

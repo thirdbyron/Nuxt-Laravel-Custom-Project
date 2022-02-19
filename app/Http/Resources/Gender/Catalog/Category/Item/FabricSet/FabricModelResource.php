@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Gender\Catalog\Category\Item\FabricSet;
 
-use App\Http\Resources\Gender\CatalogResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GenderResource extends JsonResource
+class FabricModelResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +14,11 @@ class GenderResource extends JsonResource
      */
     public function toArray($request)
     {
-        //dd($this->sizeTable);
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'dummy_url' => $this->dummy_url,
-            'catalogs' => CatalogResource::collection($this->catalogs),
-            'size_table' => $this->sizeTable,
+            'model_id' => $this->model_id,
+            'fabric_id' => $this->fabric_id,
+            'textures' => TextureResource::collection($this->textures),
         ];
     }
 }

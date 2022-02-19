@@ -11,7 +11,7 @@ class Element extends Model
     use HasFactory;
 
     protected $fillable = [
-        'option_id', 'feature_id'
+        'section_id', 'option_id', 'feature_id'
     ];
 
     public function modelOfs() {

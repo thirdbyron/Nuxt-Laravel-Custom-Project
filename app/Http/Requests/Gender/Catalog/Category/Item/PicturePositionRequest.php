@@ -17,6 +17,7 @@ class PicturePositionRequest extends FormRequest
 
     public function rules()
     {
+        //dd($this->all());
         return $this->serviceRules(
             [
                 'item_id' => ['required', 'integer'],
