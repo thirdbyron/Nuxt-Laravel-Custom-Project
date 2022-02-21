@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\BackgroundController;
+use App\Http\Controllers\Api\Cart\CreatedItemController;
+use App\Http\Controllers\Api\Cart\ScreenshotController;
+use App\Http\Controllers\Api\Cart\SelectedSettingController;
 use App\Http\Controllers\Api\DummyController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\ElementController;
 use App\Http\Controllers\Api\Gender\Catalog\Category\Item\Option\FeatureController;
@@ -90,5 +93,11 @@ Route::middleware('api')->group(function () {
             Route::apiResource('/element/models', ModelController::class);
 
         });
+    });
+
+    Route::prefix('cart')->group(function () {
+        Route::apiResource('/screenshots', ScreenshotController::class);
+        Route::apiResource('/created_items', CreatedItemController::class);
+        Route::apiResource('/created_item/selected_settings', SelectedSettingController::class);
     });
 });
