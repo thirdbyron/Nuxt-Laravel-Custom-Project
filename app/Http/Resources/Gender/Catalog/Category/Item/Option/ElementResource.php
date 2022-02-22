@@ -19,6 +19,7 @@ class ElementResource extends JsonResource
             'id' => $this->id,
             'option_id' => $this->option_id,
             'feature_id' => $this->feature_id,
+            'is_default' => $this->is_default,
             'models' => ModelOfResource::collection($this->modelOfs),
         ];
     }

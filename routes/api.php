@@ -96,8 +96,12 @@ Route::middleware('api')->group(function () {
     });
 
     Route::prefix('cart')->group(function () {
+
         Route::apiResource('/screenshots', ScreenshotController::class);
+
         Route::apiResource('/created_items', CreatedItemController::class);
+
         Route::apiResource('/created_item/selected_settings', SelectedSettingController::class);
+        
     });
 });

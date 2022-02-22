@@ -209,7 +209,9 @@ const actions = {
   },
   async setCurrentItems({ commit }, editingItem) {
     //Тут будем по id товара получать все его парметры, либо просто весь товар с параметрами, но пока из мока вылавливаем конкретный
-    const item = await this.$axios.get("http://localhost:8000/api/items");
+    const item = await this.$axios.get(
+      "http://localhost:8000/api/gender/catalog/category/items"
+    );
     const itemDefault = item.data.data.find(
       product => product.id === editingItem.id
     );

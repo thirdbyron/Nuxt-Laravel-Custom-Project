@@ -23,12 +23,14 @@ class ElementRequest extends FormRequest
                 'section_id' => ['required', 'integer'],
                 'option_id' => ['required', 'integer'],
                 'feature_id' => ['required', 'integer'],
+                'is_default' => ['required', 'integer', 'max:1'],
             ],
 
             [
                 'section_id' => ['integer'],
                 'option_id' => ['integer'],
                 'feature_id' => ['integer'],
+                'is_default' => ['integer', 'max:1'],
             ],
         );
     }

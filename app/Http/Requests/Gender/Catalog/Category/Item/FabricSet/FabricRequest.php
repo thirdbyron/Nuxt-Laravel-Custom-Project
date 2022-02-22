@@ -25,7 +25,7 @@ class FabricRequest extends FormRequest
                 'price' => ['integer'],
                 'name' => ['required', 'string', 'max:50'],
                 'in_stock' => ['required', 'integer', 'max:1'],
-                'settings' => [ 'required', 'integer', 'max:1'],
+                'is_default' => ['required', 'integer', 'max:1'],
                 'order_name' => ['required', 'string', 'max:50'],
             ],
 
@@ -35,7 +35,7 @@ class FabricRequest extends FormRequest
                 'price' => ['integer'],
                 'name' => ['string', 'max:50'],
                 'in_stock' => ['integer', 'max:1'],
-                'settings' => [ 'required', 'integer', 'max:1'],
+                'is_default' => ['integer', 'max:1'],
                 'order_name' => ['string', 'max:50'],
             ],
         );

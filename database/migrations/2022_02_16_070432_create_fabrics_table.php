@@ -22,7 +22,7 @@ class CreateFabricsTable extends Migration
             $table->string('name');
             $table->boolean('in_stock');
             //$table->decimal('extra', 3, 0);
-            $table->string('settings')->nullable();
+            $table->boolean('is_default');
             $table->string('order_name');
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ class CreatePicturesTable extends Migration
             $table->string('name');
             $table->integer('price')->nullable();
             $table->string('in_stock', 25);
-            $table->boolean('settings');
+            $table->boolean('is_default');
             $table->string('order_name');
             $table->string('articule');
             $table->timestamps();

@@ -265,7 +265,7 @@ export default {
 
           let inst = this;
           var apiItem = this.wardrobe.filter(function (item) {
-           //console.log(inst.wardrobe[2], item.id, element.id);
+            //console.log(inst.wardrobe[2], item.id, element.id);
             if (item.id == element.id.replace(/\D/g, "")) {
               return item;
             }
@@ -305,7 +305,7 @@ export default {
     animate: function (controls, renderer, scene, camera) {
       try {
         requestAnimationFrame(() => {
-          console.log(controls);
+          //console.log(controls);
           renderer.render(scene, camera);
           controls.update();
           this.animate(controls, renderer, scene, camera);
@@ -339,7 +339,7 @@ export default {
               } else {
                 model.material.color.setHex("0x" + color);
               }
-              
+
               model.position.set(0, -1.45 * apiElement[0].model_position, 0);
               //model.rotation.set(90, 0, 0);
               gltf.scene.scale.set(10, 10, 10);
