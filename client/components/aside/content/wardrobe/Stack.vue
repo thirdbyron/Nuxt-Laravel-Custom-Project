@@ -72,7 +72,7 @@ import {
   Vector3,
   Matrix4,
 } from "three-full";
-
+import { Service } from "../Service";
 export default {
   name: "Stack",
   data() {
@@ -128,7 +128,7 @@ export default {
       }
       this.$store.commit("wardrobe/setActiveClothes", settings);
     },
-    edit: function (item) {
+    edit: async function (item) {
       this.$store.dispatch("wardrobe/setCurrentItems", item);
       this.reloadModel(item.settings);
     },
@@ -264,16 +264,19 @@ export default {
           controls.rotateSpeed = 0.4;
 
           let inst = this;
-          var apiItem = this.wardrobe.filter(function (item) {
+          //console.log(this.wardrobe);
+          let apiItem = this.wardrobe.filter(function (item) {
             //console.log(inst.wardrobe[2], item.id, element.id);
             if (item.id == element.id.replace(/\D/g, "")) {
+              console.log(1);
+              console.log(item, "cooo");
               return item;
             }
           });
-          //console.log(apiItem);
+          console.log(apiItem, scene, "stack");
 
           this.loadModel(apiItem, scene);
-
+          console.log(this.loadModel(apiItem, scene), "stack");
           //set light
           /*const ambient = new AmbientLight(this.colors.lightColor, 1);
           scene.add(ambient);
@@ -315,41 +318,38 @@ export default {
       }
     },
     loadModel: function (apiElement, scene) {
-      //console.log(apiElement, scene);
+      console.log(apiElement, Service.defaults(apiElement), "defs");
+
+      let defaults = Service.defaults(apiElement);
 
       try {
         const loader = new GLTFLoader();
         //console.log(apiElement[0]);
-        apiElement[0].defaults.forEach((item) => {
-          //console.log(item);
-          loader.load(
-            "/models/" + item.model_path + "/" + item.model_name + ".glb",
-            function (gltf) {
-              let model = gltf.scene.children[0];
-              const color = item.color.slice(1);
+        //console.log(this.$store.getters["wardrobe/wardrobe"]);
+        defaults.forEach((item) => {
+          console.log(item, "for");
+          item.models.forEach((model) => {
+            console.log(model, "m");
+            loader.load(
+              "/models/" + model.model_path + "/" + model.model_name + ".glb",
+              function (gltf) {
+                let mesh = gltf.scene.children[0];
 
-              //model.geometry.computeBoundingSphere();
-              //const modelPosInAir = model.geometry.boundingSphere.center;
-              //console.log(model, apiElement[0], item.color);
+                //model.geometry.computeBoundingSphere();
+                //const modelPosInAir = model.geometry.boundingSphere.center;
+                console.log(model, apiElement[0]);
 
-              if (model.children.length > 0) {
-                model.children.forEach(async function (mesh) {
-                  mesh.material.color.setHex("0x" + color);
-                });
-              } else {
-                model.material.color.setHex("0x" + color);
+                mesh.position.set(0, -1.45 * apiElement[0].model_position, 0);
+                //model.rotation.set(90, 0, 0);
+                gltf.scene.scale.set(10, 10, 10);
+                scene.add(gltf.scene);
+              },
+              undefined,
+              function (error) {
+                console.log(error);
               }
-
-              model.position.set(0, -1.45 * apiElement[0].model_position, 0);
-              //model.rotation.set(90, 0, 0);
-              gltf.scene.scale.set(10, 10, 10);
-              scene.add(gltf.scene);
-            },
-            undefined,
-            function (error) {
-              console.log(error);
-            }
-          );
+            );
+          });
         });
       } catch (error) {
         console.log(error);
@@ -358,7 +358,6 @@ export default {
   },
   mounted() {
     this.$store.commit("wardrobe/stopEditing");
-    this.$store.commit("wardrobe/resetGender");
 
     this.$nextTick(() => {
       this.initModels(document.querySelectorAll(".item-image"));

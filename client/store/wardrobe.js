@@ -1,7 +1,5 @@
 const state = () => ({
-  gender: "man",
   wardrobe: [],
-  womanWardrobe: [],
   baseItem: {},
   panel: false,
   editedItem: null,
@@ -13,11 +11,7 @@ const state = () => ({
 
 const getters = {
   wardrobe: state => {
-    if (state.gender === "man") {
-      return state.wardrobe;
-    } else {
-      return state.womanWardrobe;
-    }
+    return state.wardrobe;
   },
   baseItem: state => {
     return state.baseItem;
@@ -49,14 +43,11 @@ const getters = {
       return null;
     }
   },
-  gender: state => {
-    return state.gender;
-  }
 };
 
 const mutations = {
   add(state, item) {
-    item.settings = item.defaults;
+    console.log(item, "c");
     if (state.wardrobe.length !== 0) {
       let last = state.wardrobe[state.wardrobe.length - 1];
       let index = last.index + 1;
@@ -189,28 +180,17 @@ const mutations = {
     state.panel = false;
     state.editedItem = null;
   },
-  changeGender(state, gender) {
-    state.gender = gender;
-    state.activeBody = null;
-    state.lastBody = null;
-    state.panel = false;
-    state.editedItem = null;
-  },
-  resetGender(state) {
-    state.gender = "man";
-    state.activeBody = null;
-    state.lastBody = null;
-  }
 };
 
 const actions = {
-  async addProduct({ commit }, item) {
-    commit("add", { ...item });
+  addProduct({ commit }, item) {
+    console.log(item, "b");
+    commit("add", item);
   },
   async setCurrentItems({ commit }, editingItem) {
     //Тут будем по id товара получать все его парметры, либо просто весь товар с параметрами, но пока из мока вылавливаем конкретный
     const item = await this.$axios.get(
-      "http://localhost:8000/api/gender/catalog/category/items"
+      "http://127.0.0.1:8000/api/gender/catalog/category/items"
     );
     const itemDefault = item.data.data.find(
       product => product.id === editingItem.id

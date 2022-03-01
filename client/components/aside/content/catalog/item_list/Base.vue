@@ -10,11 +10,15 @@
         >
           {{ activeFilter }} <img :src="angleDown" />
         </div>
-        <div class="sort" v-bind:class="{ active: sorted === true }">
-          <ul>
+        <!--<div v-if="dummy" class="">{{catalogs[0]}}{{catalogs.length}}</div>-->
+        <div
+          class="sort"
+          v-bind:class="{ active: sorted === true }"
+        >
+          <ul v-if="dummy && catalogs.length > 0">
             <li @click="sort(false, 'Все модели')">Все модели</li>
             <li
-              v-for="category in categoriesModel"
+              v-for="category in catalogs[0].categories"
               :key="category.id"
               @click="sort(category.id, category.category_name)"
             >
@@ -23,84 +27,91 @@
           </ul>
         </div>
       </div>
-      <div
-        class="elements"
-        v-if="gender === 'man'"
-        v-for="category in sortedCategories"
-        :key="category.id"
-      >
-        <span
-          class="type-header"
-          v-if="category.items.length !== 0 && activeFilter === 'Все модели'"
-          >{{ category.category_name }}</span
+      <!--<div v-if="dummy && catalogs.length > 0">
+        {{ catalogs[0].categories }}
+      </div>-->
+      <div v-if="dummy && catalogs.length > 0" class="">
+        <div
+          class="elements"
+          v-for="category in catalogs[0].categories"
+          :key="category.id"
         >
-        <p v-if="category.items.length === 0 && activeFilter !== 'Все модели'">
-          В данной категории нет товаров
-        </p>
-        <div class="grid-row">
-          <div
-            class="product"
-            v-for="item in category.items"
-            :key="item.id"
-            v-bind:class="{
-              active: activeItem === item.id && activeBody === null,
-            }"
+          <span
+            class="type-header"
+            v-if="category.items.length !== 0 && activeFilter === 'Все модели'"
+            >{{ category.category_name }}</span
           >
+          <p
+            v-if="category.items.length === 0 && activeFilter !== 'Все модели'"
+          >
+            В данной категории нет товаров
+          </p>
+          <div class="grid-row">
             <div
-              class="product-desc"
-              :style="{
-                background: 'url(' + infoImage + ') center / contain no-repeat',
+              class="product"
+              v-for="item in category.items"
+              :key="item.id"
+              v-bind:class="{
+                active: activeItem === item.id && activeBody === null,
               }"
-              v-bind:class="{ active: activeDesc === item.id }"
-              @click="setActiveDesc(item.id)"
             >
               <div
-                class="desc-tooltip"
-                v-if="activeDesc === item.id"
-                v-click-outside="hideDesc"
-              >
-                <div
-                  class="product-desc"
-                  :style="{
-                    background:
-                      'url(' + infoImage + ') center / contain no-repeat',
-                  }"
-                ></div>
-                <div class="full-name">
-                  {{ item.name }}
-                </div>
-                <span class="short-desc">{{ item.short_desc }}</span>
-                <span class="head-name">Описание</span>
-                <p>{{ item.desc }}</p>
-                <span class="head-name">Размеры в наличии</span>
-                <div class="sizes">
-                  <div class="size" v-for="(size, i) in item.sizes" :key="i">
-                    {{ size.name }}
-                  </div>
-                  <div class="sizes-table">Таблица размеров</div>
-                </div>
-                <div class="price">Цена: от {{ item.start_price }} ₽</div>
-              </div>
-            </div>
-            <div class="product-content">
-              <div
-                class="catalog-item-image"
+                class="product-desc"
                 :style="{
                   background:
-                    'url(' + itemImage + ') center / contain no-repeat',
+                    'url(' + infoImage + ') center / contain no-repeat',
                 }"
-              ></div>
-              <span class="name">{{ item.short_name }}</span>
-              <span>от {{ item.start_price }} ₽</span>
-            </div>
-            <div class="action-buttons">
-              <button @click="toWardrobe(item)">Добавить</button>
-              <button
-                @click="setActive(item)"
-                v-bind:class="{ active: activeItem === item.id }"
+                v-bind:class="{ active: activeDesc === item.id }"
+                @click="setActiveDesc(item.id)"
               >
-                Примерка
-              </button>
+                <div
+                  class="desc-tooltip"
+                  v-if="activeDesc === item.id"
+                  v-click-outside="hideDesc"
+                >
+                  <div
+                    class="product-desc"
+                    :style="{
+                      background:
+                        'url(' + infoImage + ') center / contain no-repeat',
+                    }"
+                  ></div>
+                  <div class="full-name">
+                    {{ item.name }}
+                  </div>
+                  <span class="short-desc">{{ item.short_desc }}</span>
+                  <span class="head-name">Описание</span>
+                  <p>{{ item.desc }}</p>
+                  <span class="head-name">Размеры в наличии</span>
+                  <div class="sizes">
+                    <div class="size" v-for="(size, i) in item.sizes" :key="i">
+                      {{ size.name }}
+                    </div>
+                    <div class="sizes-table">Таблица размеров</div>
+                  </div>
+                  <div class="price">Цена: от {{ item.start_price }} ₽</div>
+                </div>
+              </div>
+              <div class="product-content">
+                <div
+                  class="catalog-item-image"
+                  :style="{
+                    background:
+                      'url(' + itemImage + ') center / contain no-repeat',
+                  }"
+                ></div>
+                <span class="name">{{ item.short_name }}</span>
+                <span>от {{ item.start_price }} ₽</span>
+              </div>
+              <div class="action-buttons">
+                <button @click="toWardrobe(item)">Добавить</button>
+                <button
+                  @click="setActive(item)"
+                  v-bind:class="{ active: activeItem === item.id }"
+                >
+                  Примерка
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -110,22 +121,17 @@
 </template>
 
 <script>
+import { Service } from "../../Service";
 export default {
-  async fetch() {
-    if (this.$store.getters["catalog/categoriesModel"].length === 0) {
-      try {
-        await this.$store.dispatch("catalog/getItems");
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  },
   computed: {
-    categoriesModel() {
-      return this.$store.getters["catalog/categoriesModel"];
+    dummies() {
+      return this.$store.getters["dummy/dummies"];
     },
-    sortedCategories() {
-      return this.$store.getters["catalog/sortedCategories"];
+    dummy() {
+      return this.$store.getters["dummy/dummy"];
+    },
+    catalogs() {
+      if(this.dummy) return this.dummy.catalogs;
     },
     activeBody() {
       return this.$store.getters["wardrobe/activeBody"];
@@ -164,7 +170,7 @@ export default {
         this.activeDesc = null;
       } else {
         this.activeDesc = id;
-        console.log(this.activeDesc);
+        //console.log(this.activeDesc);
       }
     },
     slideDown: function () {
@@ -172,20 +178,29 @@ export default {
     },
     reloadModel: function (defaultsArray) {
       for (let i = 0; i < defaultsArray.length; i++) {
-        this.$eventHub.$emit(
-          "dummy:dummy_reload_tshirt",
-          defaultsArray[i]["model_name"],
-          defaultsArray[i]["model_type"],
-          defaultsArray[i]["color"]
-        );
+        defaultsArray[i].models.forEach((model) => {
+          this.$eventHub.$emit(
+            "dummy:dummy_reload_tshirt",
+            model["model_name"],
+            model["model_path"],
+            model["articule"]
+          );
+        });
       }
     },
-    toWardrobe: function (item) {
+    toWardrobe: async function (item) {
       if (this.$store.getters["wardrobe/wardrobe"].length < 5) {
+        //console.log( item.settings.sections );
+
+        //console.log(this.$store.getters["wardrobe/wardrobe"]);
+        //console.log(Service);
+        let defaults = Service.defaults(item);
 
         this.$store.dispatch("wardrobe/addProduct", item);
 
-        this.reloadModel(item.defaults);
+        //await console.log(item, "a");
+
+        await this.reloadModel(defaults);
         this.activeItem = null;
       } else {
         this.$modal.show("dialog", {
@@ -225,6 +240,12 @@ export default {
         this.reloadModel(item.defaults);
       }
     },
+  },
+
+  mounted: async function () {
+    //console.log(this.dummy, "try");
+    await this.$store.dispatch("dummy/getDummy", 1);
+    //await console.log(this.dummy, "-");
   },
 };
 </script>
