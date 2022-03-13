@@ -102,7 +102,7 @@ export default {
       await this.init();
       //this.global.scene.add(this.activeModel);
     },
-    changeClothes: function (type, modelName, color = false) {
+    /*changeClothes: function (type, modelName, color = false) {
       let t = this;
       if (type in this.activeClothes) {
         this.global.loader.load(
@@ -117,7 +117,7 @@ export default {
           }
         );
       }
-    },
+    },*/
     changecolor: function (type, color) {
       let newcolor = new MeshStandardMaterial({
         color: Number(color.replace("#", "0x")),
@@ -161,9 +161,9 @@ export default {
         //console.log(this.global.scene, "s");
         this.cleanModel();
       })
-      .$on("dummy:dummy_reload_tshirt", (type, modelName, color = null) => {
+      /*.$on("dummy:dummy_reload_tshirt", (type, modelName, color = null) => {
         this.changeClothes(type, modelName, color);
-      })
+      })*/
       .$on("dummy:changecolor_tshirt", (element, color) => {
         this.changecolor(element, color);
       })

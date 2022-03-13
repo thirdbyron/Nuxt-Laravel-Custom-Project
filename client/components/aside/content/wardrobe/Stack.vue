@@ -30,7 +30,7 @@
                 alt="Иконка показа товара"
               />
             </div>
-            <div class="item-image" :id="'model' + item.id"></div>
+            <div class="item-image" :data-id="'model' + item.id"></div>
             <span class="price">{{ item.start_price }} ₽</span>
             <div class="controls">
               <div class="control-btn" @click="remove(item)">
@@ -239,6 +239,7 @@ export default {
 
           //appending in dom
           element.appendChild(renderer.domElement);
+          
 
           //set camera
           const camera = new PerspectiveCamera(
@@ -267,7 +268,7 @@ export default {
           //console.log(this.wardrobe);
           let apiItem = this.wardrobe.filter(function (item) {
             //console.log(inst.wardrobe[2], item.id, element.id);
-            if (item.id == element.id.replace(/\D/g, "")) {
+            if (item.id == element.dataset.id.replace(/\D/g, "")) {
               console.log(1);
               console.log(item, "cooo");
               return item;

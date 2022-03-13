@@ -1,16 +1,28 @@
 <template>
   <div class="selectCont">
-    <label class="selectLabel" :for="'select'+selectItem.id">{{selectItem.name}}</label>
-    <select class="select"
-    v-model="vModel" :name="selectItem.name" :id="'select'+selectItem.id">
+    <label class="selectLabel" :for="'select' + selectItem.id">{{
+      selectItem.name
+    }}</label>
+    <select
+      class="select"
+      v-model="value"
+      :name="selectItem.name"
+      :data-id="'option' + selectItem.id"
+      
+      
+    >
+      {{
+        innerItems
+      }}
       <option
         class="selectOption"
-        :id= innerItem + feature.id
-        v-for="(innerItem, i) in selectItem.innerItems"
+        
+        v-for="(innerItem, i) in innerItems"
         :key="i"
         :value="innerItem.id"
+        :data-id="selectName + innerItem.id"
       >
-        {{innerItem.name}}
+        {{ innerItem.name }}
       </option>
     </select>
   </div>
@@ -21,12 +33,26 @@ export default {
   props: {
     selectItem: Object,
     vModel: String,
-    innerItems: String,
+    innerItems: Array,
+    selectName: String,
+    selectGroup: Number,
+  },
+
+  data: function() {
+    return{
+      value: null,
+    }
   },
 
   mounted: function () {
-    console.log(this.selectItem);
+    this.value = this.vModel;
+    console.log(this.selectItem, this.innerItems, "s");
   },
+  methods: {
+    /*selected: function(value) {
+      this.$emit('change:selected', value, this.selectItem.id, this.value, this.selectGroup);
+    }*/
+  }
 };
 </script>
 
