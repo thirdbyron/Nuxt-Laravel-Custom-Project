@@ -16,6 +16,7 @@ class SectionResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'elements' => ElementResource::collection($this->elements),
             'options' => OptionResource::collection($this->options),

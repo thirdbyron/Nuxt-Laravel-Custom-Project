@@ -1,20 +1,25 @@
 const state = () => ({
   wardrobe: [],
+  elements: [],
   baseItem: {},
   panel: false,
   editedItem: null,
-  activeBody: null,
-  lastBody: null,
-  activeLegs: null,
-  lastLegs: null
+  activeItem: null,
+  loadDefaults: true,
 });
 
 const getters = {
   wardrobe: state => {
     return state.wardrobe;
   },
+  elements: state => {
+    return state.elements;
+  },
   baseItem: state => {
     return state.baseItem;
+  },
+  loadDefaults: state => {
+    return state.loadDefaults;
   },
   editedItem: state => {
     let item = state.wardrobe.find(
@@ -32,8 +37,8 @@ const getters = {
   panel: state => {
     return state.panel;
   },
-  activeBody: state => {
-    return state.activeBody;
+  activeItem: state => {
+    return state.activeItem;
   },
   lastBody: state => {
     let item = state.wardrobe.find(product => product.index === state.lastBody);
@@ -42,7 +47,7 @@ const getters = {
     } else {
       return null;
     }
-  },
+  }
 };
 
 const mutations = {
@@ -57,29 +62,28 @@ const mutations = {
       item.index = index;
     }
     item.activeSize = "L";
-    switch (item.type) {
-      case "body":
-        state.activeBody = item.index;
-        break;
-      case "legs":
-        state.activeLegs = item.index;
-        break;
-    }
     state.wardrobe.push(item);
   },
-  setActiveClothes(state, settings) {
-    switch (settings.type) {
-      case "body":
-        state.activeBody = settings.index;
-        break;
-      case "legs":
-        state.activeLegs = settings.index;
-        break;
+
+  addElement(state, item) {
+    const elementPosition = state.elements.findIndex(
+      existingElement => existingElement.element.section_id == item[1].section_id
+    );
+
+    console.log(elementPosition >= 0, elementPosition, "addElement");
+
+    if(elementPosition >= 0) {
+      state.elements.splice(elementPosition, 1);
+      //console.log(state.elements, "addElement");
+      state.elements = [...state.elements, {item: item[0], element: item[1]}];
     }
-    if (state.activeBody !== null) {
-      state.lastBody = state.activeBody;
+    else {
+      state.elements = [...state.elements, {item: item[0], element: item[1]}];
     }
+
+    console.log(state.elements, "addElement");
   },
+
   change(state, { settingCategory, newSetting } = settings) {
     let newSettings = {
       model_name: settingCategory,
@@ -110,28 +114,13 @@ const mutations = {
       }
     });
   },
+  setLoad(state, boolean = true) {
+    return state.loadDefaults = boolean;
+  },
   reset(state, item) {
     state.wardrobe = state.wardrobe.map(element => {
       if (element.model_name === item.model_name) {
         return { ...element, settings: [...item.defaults] };
-      }
-      return element;
-    });
-  },
-  changeColor(state, { color, settingCategory } = settings) {
-    state.wardrobe = state.wardrobe.map(element => {
-      if (element.index === state.editedItem) {
-        return {
-          ...element,
-          settings: [
-            ...element.settings.map(el => {
-              if (el.model_name === settingCategory) {
-                return { ...el, color: color };
-              }
-              return el;
-            })
-          ]
-        };
       }
       return element;
     });
@@ -156,30 +145,23 @@ const mutations = {
     state.panel = true;
     state.baseItem = items.currentItem;
     state.editedItem = items.editedItem;
-    state.activeBody = items.editedItem;
+    state.activeItem = items.editedItem;
   },
   remove(state, item) {
     state.wardrobe = state.wardrobe.filter(
       product => product.index !== item.index
     );
-    if (state.wardrobe.length === 0 || state.activeBody === item.index) {
-      state.activeBody = null;
+    if (state.wardrobe.length === 0 || state.activeItem === item.index) {
+      state.activeItem = null;
     }
-    state.lastBody = state.activeBody;
   },
   clear(state) {
-    state.lastBody = null;
     state.wardrobe = [];
-  },
-  removeColors(state) {
-    state.wardrobe = state.wardrobe.map(element => {
-      return { ...element, settings: element.defaults };
-    });
   },
   stopEditing(state) {
     state.panel = false;
     state.editedItem = null;
-  },
+  }
 };
 
 const actions = {

@@ -32,11 +32,13 @@ const actions = {
     return dummies.data.data;
   },
   async getDummy({ commit }, id) {
+
     const dummy = await this.$axios.get(
       `http://127.0.0.1:8000/api/genders/${id}`
     );
     commit("setDummy", dummy.data.data);
     return dummy.data.data;
+
   }
 };
 

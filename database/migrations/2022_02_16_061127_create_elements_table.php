@@ -16,8 +16,7 @@ class CreateElementsTable extends Migration
         Schema::create('elements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
-            $table->foreignId('option_id')->constrained('options')->cascadeOnDelete();
-            $table->foreignId('feature_id')->constrained('features')->cascadeOnDelete();
+            $table->integer('features');
             $table->boolean('is_default')->nullable();
             //$table->string( 'model_name', 25 );
             $table->timestamps();

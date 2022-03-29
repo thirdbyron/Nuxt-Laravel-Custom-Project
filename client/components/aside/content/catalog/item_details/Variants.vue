@@ -68,6 +68,8 @@
 
 <script>
 import SelectTag from "../../../../tag/SelectTag.vue";
+import { Service } from "../../Service";
+
 export default {
   components: { SelectTag },
   props: {
@@ -91,9 +93,9 @@ export default {
     editedItem() {
       return this.$store.getters["wardrobe/editedItem"];
     },
-    computedForms() {
+    /*computedForms() {
       return (this.forms = this.sections);
-    },
+    },*/
   },
   mounted: async function () {
     await console.log(this.defaultItem.settings.sections, "s");
@@ -121,10 +123,56 @@ export default {
 
       document
         .querySelectorAll(`[data-id=section${formId}] select`)
-        .forEach((section) => {
-          selectedFeatures = [...selectedFeatures, section.value];
-          console.log(section.value, selectedFeatures, "forme");
+        .forEach((option) => {
+          selectedFeatures = [...selectedFeatures, option.value];
         });
+
+      /*console.log(formId);
+      console.log(
+        this.defaultItem.settings.sections.find(
+          (section) => section.id == formId
+        )
+      );*/
+
+      const section = this.defaultItem.settings.sections.find(
+        (section) => section.id == formId
+      );
+
+      console.log(
+        section.value,
+        selectedFeatures,
+        section.elements.find((element) =>
+          Service.arraysAreEqual(
+            Array.from(String(element.features)),
+            selectedFeatures
+          )
+        ),
+        "forme"
+      );
+
+      const element =
+        section.elements.find((element) => {
+          console.log(
+            Service.arraysAreEqual(
+              Array.from(String(element.features)),
+              selectedFeatures
+            ),
+            "lelelelele"
+          );
+          return Service.arraysAreEqual(
+            Array.from(String(element.features)),
+            selectedFeatures
+          );
+        }) ?? false;
+      console.log(element, "find");
+      
+      if(!element) return;
+
+      this.$store.commit("wardrobe/addElement", [this.defaultItem, element]);
+      this.$store.commit("wardrobe/setLoad", false);
+
+      this.$eventHub.$emit("wardrobe:changeClothElement", [this.defaultItem, element]);
+      this.$eventHub.$emit("dummy:changeClothElement", [this.defaultItem, element]);
     },
 
     reloadModel: function (defaultsArray) {

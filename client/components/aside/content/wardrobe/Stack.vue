@@ -23,7 +23,7 @@
           <div class="main-block">
             <div
               class="eye-hidden"
-              v-bind:class="{ active: item.index === activeBody }"
+              v-bind:class="{ active: item.index === activeItem }"
             >
               <img
                 src="~/assets/media/img/hidden.svg"
@@ -79,58 +79,28 @@ export default {
     return {
       itemImage: require("@/assets/media/img/std_tshirt.png"),
       plusImg: require("@/assets/media/img/plus.png"),
-
-      global: {
-        scene: null,
-        camera: null,
-        renderer: null,
-        loader: null,
-        controls: null,
-      },
-      colors: {
-        bgColor: 0xf0f0f0,
-        lightColor: 0xffffff,
-      },
     };
   },
   computed: {
     wardrobe() {
       return this.$store.getters["wardrobe/wardrobe"];
     },
+    elements() {
+      return this.$store.getters["wardrobe/elements"];
+    },
     editedItem() {
       return this.$store.getters["wardrobe/editedItemIndex"];
     },
-    activeBody() {
-      return this.$store.getters["wardrobe/activeBody"];
+    activeItem() {
+      return this.$store.getters["wardrobe/activeItem"];
+    },
+    loadDefaults() {
+      return this.$store.getters["wardrobe/loadDefaults"];
     },
   },
   methods: {
-    reloadModel: function (defaultsArray) {
-      for (let i = 0; i < defaultsArray.length; i++) {
-        this.$eventHub.$emit(
-          "dummy:dummy_reload_tshirt",
-          defaultsArray[i]["model_name"],
-          defaultsArray[i]["model_type"],
-          defaultsArray[i]["color"]
-        );
-      }
-    },
-    setActiveType: function (item) {
-      let settings = {
-        type: item.type,
-        index: item.index,
-      };
-      if (this.activeBody === item.index) {
-        this.$eventHub.$emit("dummy:clean_model");
-        settings.index = null;
-      } else {
-        this.reloadModel(item.settings);
-      }
-      this.$store.commit("wardrobe/setActiveClothes", settings);
-    },
     edit: async function (item) {
       this.$store.dispatch("wardrobe/setCurrentItems", item);
-      this.reloadModel(item.settings);
     },
     show: function (item) {
       if (this.editedItem !== item.index) {
@@ -139,7 +109,7 @@ export default {
       }
     },
     copy: function (item) {
-      if (this.$store.getters["wardrobe/wardrobe"].length < 5) {
+      if (this.wardrobe.length < 5) {
         this.$store.commit("wardrobe/copy", item.index);
       } else {
         this.$modal.show("dialog", {
@@ -176,13 +146,10 @@ export default {
             handler: () => {
               this.$store.commit("wardrobe/remove", item);
               this.$modal.hide("dialog");
-              if (this.activeBody !== null) {
+              if (this.activeItem !== null) {
                 let item = this.wardrobe.find(
-                  (product) => product.index === this.activeBody
+                  (product) => product.index === this.activeItem
                 );
-                this.reloadModel(item.settings);
-              } else {
-                this.$eventHub.$emit("dummy:clean_model");
               }
               if (
                 this.editedItem === item.index ||
@@ -227,8 +194,6 @@ export default {
           //console.log(element.innerHTML);
           //if( element.children.length >= 1 ) element.innerHTML = '';
 
-          let global = this.global;
-
           //set scene
           const scene = new Scene();
           scene.background = new Color(0xffffff);
@@ -239,7 +204,6 @@ export default {
 
           //appending in dom
           element.appendChild(renderer.domElement);
-          
 
           //set camera
           const camera = new PerspectiveCamera(
@@ -277,6 +241,7 @@ export default {
           console.log(apiItem, scene, "stack");
 
           this.loadModel(apiItem, scene);
+
           console.log(this.loadModel(apiItem, scene), "stack");
           //set light
           /*const ambient = new AmbientLight(this.colors.lightColor, 1);
@@ -319,7 +284,7 @@ export default {
       }
     },
     loadModel: function (apiElement, scene) {
-      console.log(apiElement, Service.defaults(apiElement), "defs");
+      //console.log(apiElement, Service.defaults(apiElement), "defs");
 
       let defaults = Service.defaults(apiElement);
 
@@ -327,41 +292,109 @@ export default {
         const loader = new GLTFLoader();
         //console.log(apiElement[0]);
         //console.log(this.$store.getters["wardrobe/wardrobe"]);
-        defaults.forEach((item) => {
-          console.log(item, "for");
-          item.models.forEach((model) => {
-            console.log(model, "m");
-            loader.load(
-              "/models/" + model.model_path + "/" + model.model_name + ".glb",
-              function (gltf) {
-                let mesh = gltf.scene.children[0];
 
-                //model.geometry.computeBoundingSphere();
-                //const modelPosInAir = model.geometry.boundingSphere.center;
-                console.log(model, apiElement[0]);
+        if (this.loadDefaults) {
+          defaults.forEach((item) => {
+            console.log(item, "for");
+            item.models.forEach((model) => {
+              console.log(model, "m");
+              loader.load(
+                "/models/" + model.model_path + "/" + model.model_name + ".glb",
+                function (gltf) {
+                  let mesh = gltf.scene.children[0];
 
-                mesh.position.set(0, -1.45 * apiElement[0].model_position, 0);
-                //model.rotation.set(90, 0, 0);
-                gltf.scene.scale.set(10, 10, 10);
-                scene.add(gltf.scene);
-              },
-              undefined,
-              function (error) {
-                console.log(error);
-              }
-            );
+                  //model.geometry.computeBoundingSphere();
+                  //const modelPosInAir = model.geometry.boundingSphere.center;
+                  console.log(model, apiElement[0]);
+
+                  mesh.position.set(0, -1.45 * apiElement[0].model_position, 0);
+                  //model.rotation.set(90, 0, 0);
+                  gltf.scene.scale.set(10, 10, 10);
+                  scene.add(gltf.scene);
+                },
+                undefined,
+                function (error) {
+                  console.log(error);
+                }
+              );
+            });
           });
-        });
+        } else {
+          console.log(this.elements, apiElement, "mnsdgjfsdrgjibfgd");
+          /*console.log(
+            this.elements.find((element) => element.item.id == apiElement[0].id),
+            "findmmm"
+          );*/
+
+          this.elements.forEach((element) => {
+            if (element.item.id == apiElement[0].id) {
+              element.element.models.forEach((model) => {
+                loader.load(
+                  "/models/" +
+                    model.model_path +
+                    "/" +
+                    model.model_name +
+                    ".glb",
+                  function (gltf) {
+                    let mesh = gltf.scene.children[0];
+
+                    console.log(model, apiElement[0]);
+
+                    mesh.position.set(
+                      0,
+                      -1.45 * apiElement[0].model_position,
+                      0
+                    );
+                    gltf.scene.scale.set(10, 10, 10);
+                    scene.add(gltf.scene);
+                  },
+                  undefined,
+                  function (error) {
+                    console.log(error);
+                  }
+                );
+              });
+            }
+          });
+        }
       } catch (error) {
         console.log(error);
       }
     },
+
+    addDefaultsToElements() {
+      !this.loadDefaults ||
+        this.wardrobe.forEach((item) => {
+          item.settings.sections.forEach((section) => {
+            section.elements.forEach((element) => {
+              //console.log(element, "eveve");
+              this.$store.commit("wardrobe/addElement", [item, element]);
+              console.log(this.elements, "eveve");
+            });
+          });
+        });
+    },
   },
   mounted() {
-    this.$store.commit("wardrobe/stopEditing");
+    //this.$store.commit("/stopEditing");
 
     this.$nextTick(() => {
       this.initModels(document.querySelectorAll(".item-image"));
+    });
+
+    this.addDefaultsToElements();
+
+    this.$eventHub.$on("wardrobe:changeClothElement", (item) => {
+      let domElement = document.querySelector(
+        `[data-id=model${item[0].id}]>canvas`
+      );
+      const domParent = domElement.parentNode;
+
+      domElement.parentNode.removeChild(domElement);
+
+      this.initModels([domParent], false);
+
+      //console.log(item[1], domElement, "wardrobeC");
     });
   },
 
@@ -373,7 +406,9 @@ export default {
         const items = await document.querySelectorAll(".item-image");
         //console.log(items);
         //console.log({ items, newWardrobe });
-        await this.initModels([items[items.length - 1]]);
+        await this.initModels([items[items.length - 1]], true);
+
+        this.addDefaultsToElements();
       });
     },
   },

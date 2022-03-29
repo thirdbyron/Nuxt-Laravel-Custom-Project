@@ -21,15 +21,13 @@ class ElementRequest extends FormRequest
         return $this->serviceRules(
             [
                 'section_id' => ['required', 'integer'],
-                'option_id' => ['required', 'integer'],
-                'feature_id' => ['required', 'integer'],
+                'features' => ['required', 'integer'],
                 'is_default' => ['required', 'integer', 'max:1'],
             ],
 
             [
                 'section_id' => ['integer'],
-                'option_id' => ['integer'],
-                'feature_id' => ['integer'],
+                'features' => ['integer'],
                 'is_default' => ['integer', 'max:1'],
             ],
         );

@@ -92,7 +92,7 @@ export default {
       return this.$store.getters["wardrobe/editedItem"];
     },
   },
-  mounted() {
+  mounted: function () {
     this.dynamicComponent = () =>
       import(`./item_details/${this.activeTab}.vue`);
   },
@@ -137,12 +137,12 @@ export default {
 .select {
   width: 100%;
   max-width: 100%;
-  padding: .5rem .8rem .5rem .8rem;
-  font-size: calc(.6rem + .8vw);
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  font-size: calc(0.6rem + 0.8vw);
   cursor: pointer;
   background-color: #eeeeee;
   line-height: 1.5;
-  margin-top: calc(.2rem + .4vw);
+  margin-top: calc(0.2rem + 0.4vw);
 }
 .select::after {
   content: "";
@@ -152,11 +152,11 @@ export default {
   clip-path: polygon(100% 0%, 0 0%, 50% 100%);
 }
 .selectLabel {
-  font-size: calc(.2rem + .8vw);
+  font-size: calc(0.2rem + 0.8vw);
   color: #777777;
   font-weight: 400;
 }
 .selectCont {
-  margin-bottom: calc(.8rem + .4vw);
+  margin-bottom: calc(0.8rem + 0.4vw);
 }
 </style>

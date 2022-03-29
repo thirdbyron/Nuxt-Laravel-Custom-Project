@@ -38,7 +38,7 @@ export default {
       let t = this;
       let global = this.global;
 
-      t.$el.innerHTML = '';
+      t.$el.innerHTML = "";
 
       global.scene = new Scene();
       const hemiLight = new HemisphereLight(0xffffff, 0x444444);
@@ -96,7 +96,12 @@ export default {
       if (this.activeModel) {
         //this.global.scene.remove(this.activeModel);
       }
-      await this.$store.dispatch("dummy/getDummy", sex);
+
+      try {
+        await this.$store.dispatch("dummy/getDummy", sex);
+      } catch (error) {
+        console.log(error);
+      }
       this.activeModel = await dummy;
 
       await this.init();
@@ -155,11 +160,14 @@ export default {
       .$on("dummy:dummy_load", () => {
         this.reloadsex(1);
       })
-      .$on("sexchecker", (value) => {
+      .$on("dummy:sexchecker", (value) => {
         //console.log(value, 'val');
         this.reloadsex(value);
         //console.log(this.global.scene, "s");
         this.cleanModel();
+      })
+      .$on("dummy:changeClothElement", (element) => {
+        console.log(element, "dummyC");
       })
       /*.$on("dummy:dummy_reload_tshirt", (type, modelName, color = null) => {
         this.changeClothes(type, modelName, color);
@@ -173,4 +181,3 @@ export default {
   },
 };
 </script>
-

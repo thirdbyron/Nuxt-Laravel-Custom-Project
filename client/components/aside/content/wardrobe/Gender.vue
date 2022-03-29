@@ -46,7 +46,7 @@ export default {
   methods: {
     sexchange: function () {
       //console.log(this.$eventHub);
-      this.$eventHub.$emit("sexchecker", this.activeGender);
+      this.$eventHub.$emit("dummy:sexchecker", this.activeGender);
     },
   },
 
